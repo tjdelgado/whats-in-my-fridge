@@ -3,9 +3,13 @@ Flask app for tracking and checking what's in your fridge, when it expires, and 
 
 ## Team Roster
 Thomas Delgado - TODO: ROLE
+
 Pierre-Alex Journes - TODO: ROLE
+
 Dena Murr - TODO: ROLE
+
 Ivan Solovyev TODO: ROLE
+
 
 ## Far Vision
 We envision a future where:
