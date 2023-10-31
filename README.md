@@ -30,6 +30,11 @@ As our first step towards transforming the refrigerator experience, we are going
 
 ## Who is this for? (Stakeholder types)
 We think this project is suitable for most everyone with a fridge
+forgetful people
+busy people
+people with lots of stuff in fridge
+people who cook a lot
+people who dislike food waste??
 
 ## Project Management Notes
 
