@@ -44,6 +44,8 @@ people who dislike food waste??
 
 ## Project Management Notes
 
+Backlog link - https://miro.com/app/board/uXjVNU4Q6oo=/?share_link_id=601517274408
+
 ### Rationale for ordering project backlog
 We order the items in our product backlog first by the value we expect they will deliver to our stakeholders, and then by the order in which they need to be done. (e.g., if PBI A depends on PBI B to be done, then we list B first, then A, assuming they have the same value to our stakeholders.) 
 
