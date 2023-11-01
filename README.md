@@ -10,6 +10,8 @@ Dena Murr - TODO: ROLE
 
 Ivan Solovyev TODO: ROLE
 
+Lester Leong TODO: ROLE
+
 
 ## Far Vision
 We envision a future where:
