@@ -12,6 +12,10 @@ Ivan Solovyev - Developer
 
 Lester Leong - Developer + Product Owner
 
+## Schedule
+Standup Monday after class
+Sprint planning Wednesdays at 6pm EST
+
 ### Stakeholders
 * Caroline Mak
 * Thomas Delgado
