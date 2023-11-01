@@ -12,6 +12,10 @@ Ivan Solovyev TODO: Developer
 
 Lester Leong TODO: Developer
 
+### Stakeholders
+* Caroline Mak
+* Thomas Delgado
+* Dena Murr
 
 ## Far Vision
 We envision a future where:
