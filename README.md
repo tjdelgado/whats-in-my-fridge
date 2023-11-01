@@ -49,7 +49,7 @@ Backlog link - https://miro.com/app/board/uXjVNU4Q6oo=/?share_link_id=6015172744
 ### Rationale for ordering project backlog
 We order the items in our product backlog first by the value we expect they will deliver to our stakeholders, and then by the order in which they need to be done. (e.g., if PBI A depends on PBI B to be done, then we list B first, then A, assuming they have the same value to our stakeholders.) 
 
-### TODO Definition of Ready
+### Definition of Ready
 We consider a product backlog item ready when:
 * It has a title
 * The user story has at least an opening sentence
@@ -59,6 +59,6 @@ We consider a product backlog item ready when:
     * Developer tasks
     * Plan of execution
  
-### TODO Other notes
+### Other notes
 To generate our initial backlog estimates, we used XXX (big uncertain small?)
 Only developers participate in our PBI estimates.
