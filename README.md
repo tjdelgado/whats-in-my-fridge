@@ -2,15 +2,15 @@
 Flask app for tracking and checking what's in your fridge, when it expires, and what you can make with what's not expired in your fridge.
 
 ## Team Roster
-Thomas Delgado - TODO: Developer 
+Thomas Delgado - Developer 
 
-Pierre-Alex Journes - TODO: Developer
+Pierre-Alex Journes - Developer
 
-Dena Murr - TODO: Developer + Scrum Master
+Dena Murr - Developer + Scrum Master
 
-Ivan Solovyev TODO: Developer
+Ivan Solovyev - Developer
 
-Lester Leong TODO: Developer + Product Owner
+Lester Leong - Developer + Product Owner
 
 ### Stakeholders
 * Caroline Mak
