@@ -26,7 +26,9 @@ And more on testing Flask apps using pytest: https://flask.palletsprojects.com/e
 # Database schema notes
 
 `items` table:
+
 table corresponding to current contents of fridge
+
 | colname       | constraints         | notes                             |
 |---------------|---------------------|-----------------------------------|
 | "id"          | INTEGER PRIMARY KEY | synthetic PK                      |
@@ -37,7 +39,9 @@ table corresponding to current contents of fridge
 |               |                     |                                   |
 
 `stored_items` table:
+
 table for items user has chosen to store for future reference
+
 | colname       | constraints         | notes                             |
 |---------------|---------------------|-----------------------------------|
 | "id"          | INTEGER PRIMARY KEY | synthetic PK                      |
@@ -47,19 +51,27 @@ table for items user has chosen to store for future reference
 
 
 `recipes` table:
+
 mostly keeps track of recipe names
+
 | colname | constraints         | notes        |
 |---------|---------------------|--------------|
 | "id"    | INTEGER PRIMARY KEY | synthetic PK |
 | "name"  | TEXT NOT NULL       | item name    |
-|         |                     |              |
-|         |                     |              |
-|         |                     |              |
 
 `recipes_ingredients` table:
+
 keeps track of what recipes take which ingredients and v.v.
 The tuple (r,i) is in this table iff food item i is an ingredient of
-recipe r
+recipe r.
+
+| colname     | constraints                  | notes               |
+|-------------|------------------------------|---------------------|
+| "id"        | INTEGER PRIMARY KEY          | synthetic pk        |
+| "recipe_id" | INTEGER FOREIGN KEY NOT NULL | ref: `recipes`      |
+| "ingr_id"   | INTEGER FOREIGN KEY NOT NULL | ref: `stored_items` |
+| "ingr_qty"  | NUMERIC NOT NULL             |                     |
+
 
 # Setting up your dev environment
 
