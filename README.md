@@ -12,6 +12,8 @@ Ivan Solovyev - Developer
 
 Lester Leong - Developer + Product Owner
 
+Scott M - Developer
+
 ## Schedule
 Standup Monday after class
 Sprint planning Wednesdays at 6pm EST
