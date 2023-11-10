@@ -1,0 +1,17 @@
+# listing of files and subdirectories to not include in version control
+# mostly things like the .venv/build environment proper
+
+.venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
