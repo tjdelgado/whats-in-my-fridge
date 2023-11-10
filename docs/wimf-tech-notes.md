@@ -29,14 +29,16 @@ And more on testing Flask apps using pytest: https://flask.palletsprojects.com/e
 
 table corresponding to current contents of fridge
 
-| colname       | constraints         | notes                             |
-|---------------|---------------------|-----------------------------------|
-| "id"          | INTEGER PRIMARY KEY | synthetic PK                      |
-| "name"        | TEXT NOT NULL       | item name                         |
-| "expiry_time" | NUMERIC NOT NULL    | how long takes for item to go bad |
-| "date_added"  | NUMERIC NOT NULL    | stored as julian date             |
-| "expiry_date" | NUMERIC NOT NULL    | also julian date                  |
-|               |                     |                                   |
+| colname       | constraints          | notes                                   |
+|---------------|----------------------|-----------------------------------------|
+| "id"          | INTEGER PRIMARY KEY  | synthetic PK                            |
+| "name"        | TEXT NOT NULL        | item name                               |
+| "expiry_time" | INTEGER NOT NULL     | # days for item to go bad, -1 for indef |
+| "date_added"  | TEXT NOT NULL        | stored as YYYY-MM-DD                    |
+| "expiry_date" | NUMERIC DEFAULT NULL | also YYYY-MM-DD                         |
+|               |                      |                                         |
+
+TODO: add details on trigger to compute expiry date
 
 `stored_items` table:
 
@@ -47,7 +49,6 @@ table for items user has chosen to store for future reference
 | "id"          | INTEGER PRIMARY KEY | synthetic PK                      |
 | "name"        | TEXT NOT NULL       | item name                         |
 | "expiry_time" | NUMERIC NOT NULL    | how long takes for item to go bad |
-| "expiry_date" | NUMERIC NOT NULL    | also julian date                  |
 
 
 `recipes` table:
@@ -62,6 +63,7 @@ mostly keeps track of recipe names
 `recipes_ingredients` table:
 
 keeps track of what recipes take which ingredients and v.v.
+
 The tuple (r,i) is in this table iff food item i is an ingredient of
 recipe r.
 
