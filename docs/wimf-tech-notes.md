@@ -22,6 +22,17 @@ Unit testing Flask apps using pytest: https://flask.palletsprojects.com/en/3.0.x
 
 And more on testing Flask apps using pytest: https://flask.palletsprojects.com/en/3.0.x/testing/
 
+# How to run the flask app locally
+1. Ensure that you are in the project directory, and that the venv has been activated, as by, e.g., on Linux,
+    $ . .venv/bin/activate
+2. Run:
+    flask --app wimf run --debug
+
+Flask will monitor the project directory (mostly .py files I think) for changes and will reload the flask app
+when it detects such changes.
+
+3. If you need to re-init the db, try
+    flask --app wimf init-db 
 
 # Database schema notes
 
