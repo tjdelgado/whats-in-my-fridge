@@ -46,10 +46,10 @@ table corresponding to current contents of fridge
 | "name"        | TEXT NOT NULL        | item name                               |
 | "expiry_time" | INTEGER NOT NULL     | # days for item to go bad, -1 for indef |
 | "date_added"  | TEXT NOT NULL        | stored as YYYY-MM-DD                    |
-| "expiry_date" | NUMERIC DEFAULT NULL | also YYYY-MM-DD                         |
+| "expiry_date" | NUMERIC DEFAULT NULL | Also YYYY-MM-DD                         |
 |               |                      |                                         |
 
-TODO: add details on trigger to compute expiry date
+TODO: get rid of trigger
 
 `stored_items` table:
 

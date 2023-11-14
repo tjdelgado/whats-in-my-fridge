@@ -1,0 +1,65 @@
+.footnotes {
+    /* TODO: needs help */
+    border: 0;
+    height: 1px;
+    background-color: #fff;
+    color: #fff;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 38px;
+}
+
+
+h2 {
+    font-family: sans-serif;
+    font-size: 28px;
+}
+
+h3 {
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+table {
+    width: 90%;
+}
+th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.expiring-soon {
+    background-color: rgba(220, 220, 20, 0.5)
+}
+
+.expired {
+    background-color: rgba(220, 20, 20, 0.5)
+}
+
+body {
+    background-color: #fff;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section {
+    padding: 0.5rem 2rem 1rem 2rem;
+}

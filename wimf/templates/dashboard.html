@@ -1,0 +1,36 @@
+{% extends "parent-template.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <h1 class="center">Dashboard</h1>
+    <hr>
+    {% if current_items|length > 0 %}
+    <table class="center">
+        <tr>
+            <th>Name</th>
+            <th>Date Added</th>
+            <th>Days to Expiry</th>
+            <th>Expiry Date</th>
+        </tr>
+        {% for i in current_items %}
+        {% if i.days_to_expiry() <= 0 %}
+        <tr class="expired">
+        {% elif (i.days_to_expiry() > 0) and (i.days_to_expiry() < 4) %}
+        <tr class="expiring-soon">
+        {% else %}
+        <tr>
+        {% endif %}
+            <td>{{ i.name }}</td>
+            <td>{{ i.date_added.isoformat() }}</td>
+            <td>{{ i.days_to_expiry() }}</td>
+            <td>{{ i.expiry_date.isoformat() }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="center">Nothing in the fridge!</p>
+    {% endif %}
+{% endblock %}

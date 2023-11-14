@@ -8,7 +8,9 @@ import os
 #import db handling
 from . import db
 
-from flask import Flask
+
+from flask import Flask, render_template, request, redirect
+from .data_models import FridgeItem
 
 
 def create_app(test_config=None):
@@ -40,14 +42,13 @@ def create_app(test_config=None):
             "SELECT * FROM ITEMS"
         ).fetchall()
 
-        # stub for now - turns database rows into strings for dumb output
-        retstr = ""
-        for r in rows:
-            for k in r.keys():
-                retstr += str(k) + ": " + str(r[k]) + ', '
-            retstr += "\n"
-        return retstr
-
+        current_items = [FridgeItem(r["name"],
+                                    r["expiry_time"],
+                                    r["date_added"],
+                                    r["expiry_date"])
+                         for r in rows]
+        #breakpoint()
+        return render_template("dashboard.html", current_items=current_items)
     db.init_app(app)
 
     return app
