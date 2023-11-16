@@ -13,6 +13,7 @@ from flask import Flask, render_template, request, redirect
 from .data_models import FridgeItem
 
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -34,21 +35,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that serves items table contents as strings
-    @app.route('/')
-    def dashboard():
-        mydb = db.get_db()
-        rows = mydb.execute(
-            "SELECT * FROM ITEMS"
-        ).fetchall()
-
-        current_items = [FridgeItem(r["name"],
-                                    r["expiry_time"],
-                                    r["date_added"],
-                                    r["expiry_date"])
-                         for r in rows]
-        #breakpoint()
-        return render_template("dashboard.html", current_items=current_items)
     db.init_app(app)
 
+    from wimf import views
+    app.register_blueprint(views.bp)
+  #  app.add_url_rule("/", endpoint="dashboard")
     return app
+
+from wimf import views
