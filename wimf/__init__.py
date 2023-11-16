@@ -10,7 +10,9 @@ from . import db
 
 
 from flask import Flask, render_template, request, redirect
-from .data_models import FridgeItem
+from wimf.data_models import FridgeItem
+
+from wimf.helpers import db_convert_isodate
 
 
 def create_app(test_config=None):
@@ -44,11 +46,26 @@ def create_app(test_config=None):
 
         current_items = [FridgeItem(r["name"],
                                     r["expiry_time"],
-                                    r["date_added"],
-                                    r["expiry_date"])
+                                    db_convert_isodate(r["date_added"]),
+                                    db_convert_isodate(r["expiry_date"]))
                          for r in rows]
         #breakpoint()
         return render_template("dashboard.html", current_items=current_items)
+
+    @app.route('/items')
+    def items():
+        return "implement me!"
+
+    @app.route('/saved_items')
+    def saved_items():
+        return "implement me!"
+
+    @app.route('/recipes')
+    def recipes():
+        return "implement me!"
+
+
+
     db.init_app(app)
 
     return app
