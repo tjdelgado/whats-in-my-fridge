@@ -36,6 +36,12 @@ when it detects such changes.
 3. If you need to re-init the db, try
     `flask --app wimf init-db`
 
+# Other commonly used commands
+
+1. To run unit tests, first cd into the root directory of the project (not /wimf) and run:
+    `python3 -m pytest`
+NOTE THAT ALL TESTS should live in the /tests directory, and ideally begin with `test_`. Otherwise pytest may not find them!
+
 # Database schema notes
 
 `items` table:

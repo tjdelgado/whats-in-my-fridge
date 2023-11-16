@@ -1,4 +1,5 @@
-# adapted from the Flask Tutorial app flaskr
+# file for pytest to allow functional/integration tests of endpoints
+# adapted from flask tutorial code
 
 import os
 import tempfile

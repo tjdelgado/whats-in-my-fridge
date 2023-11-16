@@ -41,6 +41,7 @@ class FridgeItem:
     """
     def __init__(self, name, expiry_time: int, date_added: date=None, expiry_date: date=None):
          self.name = name
+         self.expiry_time = expiry_time
          # if expiry_time is None:
          #     self.expiry_time = None
          # else:
