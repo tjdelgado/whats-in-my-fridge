@@ -20,10 +20,21 @@ def dashboard():
 
     current_items = [FridgeItem(r["name"],
                                 r["expiry_time"],
-                                r["date_added"],
-                                r["expiry_date"])
+                                db_convert_isodate(r["date_added"]),
+                                db_convert_isodate(r["expiry_date"]))
                      for r in rows]
 
     #breakpoint()
     return render_template("dashboard.html", current_items=current_items)
 
+@bp.route('/items')
+def items():
+    return "implement me!"
+
+@bp.route('/saved_items')
+def saved_items():
+    return "implement me!"
+
+@bp.route('/recipes')
+def recipes():
+    return "implement me!"
