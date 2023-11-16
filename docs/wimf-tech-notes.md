@@ -1,11 +1,13 @@
 # python/package/library versions at a glance
-| Library   | Version | Notes                        |
-|-----------|---------|------------------------------|
-| python    | 3.9.17  |                              |
-| SQLite    | 3.40+   | Any recent version should do |
-| Flask     | 3.0.0   |                              |
-| pytest    | 7.4.3   |                              |
-| bootstrap | 5.3.2   |                              |
+| Library         | Version | Notes                        |
+|-----------------|---------|------------------------------|
+| python          | 3.9.17  |                              |
+| SQLite          | 3.40+   | Any recent version should do |
+| Flask           | 3.0.0   |                              |
+| pytest          | 7.4.3   |                              |
+| bootstrap       | 5.3.2   |                              |
+| bootstrap-flask | 2.3.2   |                              |
+| Flask-WTF       | 1.2.1   |                              |
 
 # Quick reference links:
 Flask documentation: https://flask.palletsprojects.com/en/3.0.x/
