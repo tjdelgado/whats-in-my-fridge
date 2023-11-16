@@ -10,11 +10,6 @@ from . import db
 
 
 from flask import Flask, render_template, request, redirect
-from wimf.data_models import FridgeItem
-
-from wimf.helpers import db_convert_isodate
-
-
 
 def create_app(test_config=None):
     # create and configure the app
