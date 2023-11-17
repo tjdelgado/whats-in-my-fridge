@@ -1,4 +1,5 @@
 {% extends "parent-template.html" %}
+{% from "bootstrap5/form.html" import render_form %}
 
 {% block title %}
     Dashboard
@@ -33,4 +34,5 @@
     {% else %}
     <p class="center">Nothing in the fridge!</p>
     {% endif %}
+		{{ render_form(form) }}
 {% endblock %}

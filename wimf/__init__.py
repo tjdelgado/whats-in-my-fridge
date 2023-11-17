@@ -10,6 +10,11 @@ from . import db
 
 
 from flask import Flask, render_template, request, redirect
+from flask_bootstrap import Bootstrap5
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
+import secrets
 
 def create_app(test_config=None):
     # create and configure the app
@@ -31,6 +36,11 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    foo = secrets.token_urlsafe(16)
+    app.secret_key = foo
+    bootstrap = Bootstrap5(app)
+    csrf = CSRFProtect(app)
 
     db.init_app(app)
 
