@@ -7,7 +7,7 @@ TODO: StoredItem: represents members of items stored for future reference;
       corresponds to the stored_items[??] table in the DB
 TODO: Recipe: represents members of the recipe table in the DB"""
 
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 class FridgeItem:
     """Class for representing members of the items table in the DB.
@@ -39,7 +39,8 @@ class FridgeItem:
     expiry_date is None, returns None.
 
     """
-    def __init__(self, name, expiry_time: int, date_added: date=None, expiry_date: date=None):
+    def __init__(self, item_id, name, expiry_time: int, date_added: date=None, expiry_date: date=None):
+         self.item_id = item_id
          self.name = name
          self.expiry_time = expiry_time
          # if expiry_time is None:
@@ -56,10 +57,13 @@ class FridgeItem:
              else:
                  self.expiry_date = expiry_date
          else:
-             self.expiry_date = None
+             # self.expiry_date = None
+             d1 =datetime.strptime(expiry_date, "%Y-%m-%d")
+             d2 =datetime.strptime(date_added, "%Y-%m-%d")
+             self.expiry_time = (d1 - d2).days 
+             self.expiry_date = expiry_date
     def __str__(self):
-        return f"name: {self.name}, expiry_time: {self.expiry_time}, date_added: \
-               {self.date_added}, expiry_date: {self.expiry_date}"
+        return f"id: {self.item_id}, name: {self.name}, expiry_time: {self.expiry_time}, date_added: {self.date_added}, expiry_date: {self.expiry_date}"
     def update_expiry(self, new_date: date):
         """Updates expiry_date to new_date.
         TODO: add sanity checking - can't set date in the past? do we care?"""

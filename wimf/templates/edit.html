@@ -1,0 +1,11 @@
+{% extends "parent-template.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <h1 class="center">Edit Item</h1>
+		{{ render_form(editForm) }}
+{% endblock %}
