@@ -44,6 +44,7 @@ class FridgeItem:
         self.item_id = item_id
         self.name = name
         self.expiry_time = expiry_time
+        print(date_added)
         if date_added is None:
             self.date_added = date.today()
         else:
@@ -59,12 +60,15 @@ class FridgeItem:
             d2 =datetime.strptime(date_added, "%Y-%m-%d")
             self.expiry_time = (d1 - d2).days 
             self.expiry_date = expiry_date
+
     def __str__(self):
         return f"id: {self.item_id}, name: {self.name}, expiry_time: {self.expiry_time}, date_added: {self.date_added}, expiry_date: {self.expiry_date}"
+
     def update_expiry(self, new_date: date):
         """Updates expiry_date to new_date.
         TODO: add sanity checking - can't set date in the past? do we care?"""
         self.expiry_date = new_date
+
     def days_to_expiry(self) -> int:
         """Returns number of days between expiry date and present date."""
         if self.expiry_date is None:

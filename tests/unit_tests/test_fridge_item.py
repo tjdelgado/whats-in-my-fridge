@@ -32,9 +32,6 @@ def test_FridgeItem_noExpiry_simple():
     assert item.expiry_date == "2023-11-24" 
     assert item.date_added == "2023-11-20" 
 
-def test_FridgeItem_noExpiry_dateadded():
-    #TODO
-    assert 1 == 1
 
 def test_FridgeItem_noExpiry_expiry():
     #TODO
