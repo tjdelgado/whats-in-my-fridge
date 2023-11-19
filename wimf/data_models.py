@@ -40,28 +40,25 @@ class FridgeItem:
 
     """
     def __init__(self, item_id, name, expiry_time: int, date_added: date=None, expiry_date: date=None):
-         self.item_id = item_id
-         self.name = name
-         self.expiry_time = expiry_time
-         # if expiry_time is None:
-         #     self.expiry_time = None
-         # else:
-         #     self.expiry_time = expiry_time
-         if date_added is None:
-             self.date_added = date.today()
-         else:
-             self.date_added = date_added
-         if expiry_time is not None:
-             if expiry_date is None:
-                 self.expiry_date = self.date_added + timedelta(days=expiry_time)
-             else:
-                 self.expiry_date = expiry_date
-         else:
-             # self.expiry_date = None
-             d1 =datetime.strptime(expiry_date, "%Y-%m-%d")
-             d2 =datetime.strptime(date_added, "%Y-%m-%d")
-             self.expiry_time = (d1 - d2).days 
-             self.expiry_date = expiry_date
+
+        self.item_id = item_id
+        self.name = name
+        self.expiry_time = expiry_time
+        if date_added is None:
+            self.date_added = date.today()
+        else:
+            self.date_added = date_added
+        if expiry_time is not None:
+            if expiry_date is None:
+                self.expiry_date = self.date_added + timedelta(days=expiry_time)
+            else:
+                self.expiry_date = expiry_date
+        else:
+            # self.expiry_date = None
+            d1 =datetime.strptime(expiry_date, "%Y-%m-%d")
+            d2 =datetime.strptime(date_added, "%Y-%m-%d")
+            self.expiry_time = (d1 - d2).days 
+            self.expiry_date = expiry_date
     def __str__(self):
         return f"id: {self.item_id}, name: {self.name}, expiry_time: {self.expiry_time}, date_added: {self.date_added}, expiry_date: {self.expiry_date}"
     def update_expiry(self, new_date: date):

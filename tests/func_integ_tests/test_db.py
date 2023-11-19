@@ -34,7 +34,7 @@ def test_database_initialization(app):
         assert db.execute("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='items'").fetchone()[0] == 1
 
 def test_insert_fridge_item(app):
-    test_item = FridgeItem(name="Milk", expiry_time=7, date_added='2023-01-01', expiry_date='2023-01-08')
+    test_item = FridgeItem(item_id=1, name="Milk", expiry_time=7, date_added='2023-01-01', expiry_date='2023-01-08')
     with app.app_context():
         db = get_db()
         db.execute("INSERT INTO items (name, expiry_time, date_added, expiry_date) VALUES (?, ?, ?, ?)",
@@ -43,5 +43,6 @@ def test_insert_fridge_item(app):
 
         item = db.execute("SELECT * FROM items WHERE name = ?", (test_item.name,)).fetchone()
         assert item is not None
+        assert item["id"] is not None 
         assert item["name"] == test_item.name
         assert item["expiry_time"] == test_item.expiry_time
