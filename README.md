@@ -35,21 +35,10 @@ We generally believe this project will be suitable for anyone who is forgetful, 
 
 
 ## Far Vision
-We envision a future where:
-* You have 100% visibility into the contents of your fridge,
-* You always know what you can make with what you have on hand,
-* And where food waste because those leftovers got buried in the back of the fridge is a thing of the past
+100%, 24/7 visibility of all your food.
 
 ## Near Vision
-As our first step towards transforming the refrigerator experience, we are going to develop a web app in Flask that:
-* Empowers users to enter items they want to keep track of, along with their expiration dates
-* Allows users to mark when they threw out or consumed an item, and tracks that info
-* Displays to users a filterable and sortable list of their fridge's contents, including expiration dates
-* Allows users to enter (the ingredients that go into) recipes
-* Allows users to see what recipes they can or cannot make with the food they have on hand
-* Displays alerts for soon-to-expire foods
-* Possibly produces .ics / emacs org-mode files for putting expiration dates on your gcal
-* Maybe allows multiple users to log in?
+More convenience and function than google sheets.
 
 ## Who is this for? (Stakeholder types)
 We think this project is suitable for most everyone with a fridge, including:
