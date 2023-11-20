@@ -56,8 +56,8 @@ class FridgeItem:
                 self.expiry_date = expiry_date
         else:
             # self.expiry_date = None
-            d1 =datetime.strptime(expiry_date, "%Y-%m-%d")
-            d2 =datetime.strptime(date_added, "%Y-%m-%d")
+            d1 = datetime.strptime(expiry_date, "%Y-%m-%d")
+            d2 = datetime.strptime(date_added, "%Y-%m-%d")
             self.expiry_time = (d1 - d2).days 
             self.expiry_date = expiry_date
 
