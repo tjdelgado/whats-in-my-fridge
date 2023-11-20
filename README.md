@@ -18,6 +18,12 @@ Scott M - Developer
 Standup Monday after class
 Sprint planning Wednesdays at 6pm EST
 
+## Test Server
+A periodically updated demo of our software can be found at the following link:
+
+<http://44.218.113.51/>
+(HTTPS support coming soon...)
+
 ### Stakeholders
 * Caroline Mak
 * Thomas Delgado
