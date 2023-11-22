@@ -25,11 +25,16 @@ class ItemForm(FlaskForm):
 
 @bp.route('/', methods=["GET", "POST"])
 def dashboard():
-    mydb = db.get_db()
-    rows = mydb.execute(
-        "SELECT * FROM ITEMS"
-    ).fetchall()
+    # Default sorting parameters
+    sort = request.args.get('sort', 'name')
+    direction = request.args.get('direction', 'asc')
 
+    # Database query with sorting
+    mydb = db.get_db()
+    query = f"SELECT * FROM ITEMS ORDER BY {sort} {direction}"
+    rows = mydb.execute(query).fetchall()
+
+    # Convert rows to FridgeItem objects
     current_items = [FridgeItem(r["id"],
                                 r["name"],
                                 r["expiry_time"],
@@ -50,7 +55,7 @@ def dashboard():
         return redirect(url_for("views.success"))
     else:
         print("sadge")
-    return render_template("dashboard.html", current_items=current_items, form=form)
+    return render_template("dashboard.html", current_items=current_items, form=ItemForm())
 
 @bp.route('/success')
 def success():

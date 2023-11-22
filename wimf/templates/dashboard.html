@@ -11,40 +11,34 @@
     {% if current_items|length > 0 %}
     <table class="center">
         <tr>
-            <th>Name</th>
-            <th>Date Added</th>
-            <th>Days to Expiry</th>
-            <th>Expiry Date</th>
-						<th>Edit Item</th>
-						<th>Delete Item</th>
+            <th><a href="/?sort=name&direction=asc">Name</a></th>
+            <th><a href="/?sort=date_added&direction=asc">Date Added</a></th>
+            <th><a href="/?sort=expiry_date&direction=asc">Expiry Date</a></th>
+            <th>Edit Item</th>
+            <th>Delete Item</th>
         </tr>
         {% for i in current_items %}
-        {% if i.days_to_expiry() <= 0 %}
-        <tr class="expired">
-        {% elif (i.days_to_expiry() > 0) and (i.days_to_expiry() < 4) %}
-        <tr class="expiring-soon">
-        {% else %}
         <tr>
-        {% endif %}
             <td>{{ i.name }}</td>
             <td>{{ i.date_added.isoformat() }}</td>
-            <td>{{ i.days_to_expiry() }}</td>
             <td>{{ i.expiry_date.isoformat() }}</td>
-						<td><form action="{{ url_for('views.edit_item', item_id=i.item_id) }}" method=get class=edit-item>
-              {{ form.csrf_token }}
-							<input type=submit value="Edit" />
-							</form>
-						</td>
-						<td><form action="{{ url_for('views.delete_item', item_id=i.item_id) }}" method=post class=delete-item>
-              {{ form.csrf_token }}
-							<input type=submit value="Delete" />
-							</form>
-						</td>
+            <td>
+                <form action="{{ url_for('views.edit_item', item_id=i.item_id) }}" method="get" class="edit-item">
+                    {{ form.csrf_token }}
+                    <input type="submit" value="Edit" />
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('views.delete_item', item_id=i.item_id) }}" method="post" class="delete-item">
+                    {{ form.csrf_token }}
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
     <p class="center">Nothing in the fridge!</p>
     {% endif %}
-		{{ render_form(form) }}
+    {{ render_form(form) }}
 {% endblock %}
