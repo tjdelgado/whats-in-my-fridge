@@ -9,6 +9,7 @@ CREATE TABLE "items" (
     "expiry_time" INTEGER NOT NULL,
     "date_added" TEXT NOT NULL DEFAULT CURRENT_DATE,
     "expiry_date" TEXT DEFAULT NULL,
+    "quantity" INTEGER NOT NULL DEFAULT 1,  -- Add this line
     PRIMARY KEY("id")
 );
 
