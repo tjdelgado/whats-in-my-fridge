@@ -41,7 +41,10 @@ when it detects such changes.
 1. To run unit tests, first cd into the root directory of the project (not /wimf) and run:
     `python3 -m pytest`
 NOTE THAT ALL TESTS should live in the /tests directory, and ideally begin with `test_`. Otherwise pytest may not find them!
-
+2. Before you start working, make sure you have the latest version of the repo --- run this command to sync with the repo:
+     `git pull`
+3. Run this every time you pull from the git repo
+     `pip install -r requirements.txt`
 # Database schema notes
 
 `items` table:
