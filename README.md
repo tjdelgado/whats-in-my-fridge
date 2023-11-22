@@ -39,14 +39,6 @@ For more information on our stakeholders, please see our user personae at the fo
 ## Near Vision
 More convenience and function than google sheets.
 
-## Who is this for? (Stakeholder types)
-We think this project is suitable for most everyone with a fridge, including:
-* forgetful people
-* busy people
-* people with lots of stuff in fridge
-* people who cook a lot
-* people who dislike food waste??
-
 ## Project Management Notes
 
 ### General Sprint Evidence Document (screenshots etc)
