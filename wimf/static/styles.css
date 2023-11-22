@@ -35,12 +35,12 @@ td {
     padding: 8px;
 }
 
-.expiring-soon {
-    background-color: rgba(220, 220, 20, 0.5)
+.expired {
+    background-color: red;
 }
 
-.expired {
-    background-color: rgba(220, 20, 20, 0.5)
+.expiring-soon {
+    background-color: orange;
 }
 
 body {
