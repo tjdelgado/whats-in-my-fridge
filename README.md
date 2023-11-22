@@ -25,14 +25,13 @@ A periodically updated demo of our software can be found at the following link:
 (HTTPS support coming soon...)
 
 ### Stakeholders
-* Caroline Mak
-* Thomas Delgado
-* Dena Murr
+* Caroline Mak (real)
+* Michael Thompson
+* Emily Rodriguez
 
-We believe in "dogfooding" our work. In particular, this project was born of the desire of Thomas' partner, Caroline, for a more ergonomic system for tracking the contents of their fridge and freezer. Accordingly, Thomas and Caroline are stakeholders in this project, and will be testing it at home and providing feedback. Dena, as one of our developers specializing in UI/UX, will also be part of this effort. 
+For more information on our stakeholders, please see our user personae at the following link:
 
-We generally believe this project will be suitable for anyone who is forgetful, or simply too busy to keep track of what's in their fridge or freezer.
-
+<https://docs.google.com/document/d/1pDnbMzx1gTdj-3cpfu23fXqOMyIZxIizi210xrqy6dM/edit?usp=sharing>
 
 ## Far Vision
 100%, 24/7 visibility of all your food.
