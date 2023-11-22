@@ -85,3 +85,10 @@ Since we have no prior information on expected or actual sprint velocity as a ne
 Only developers participated in sprint planning, estimating the number of story points in this sprint, and pulling appropriate stories from the product backlog to the sprint backlog for this sprint. 
 ### Testing
 Tests for this and future sprints can be found in the top level `tests` directory inside the repo. This includes unit tests (in their own folder) and other tests (e.g. functional and integration) we use.
+
+### Sprint 2 Notes
+
+#### Velocity Estimation
+For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 8 story points this sprint, since that's the number of points we completed last sprint. We revised that to 9 since one of our developers in a fit of excitement accidentally implemented a 2-point feature not in last sprint's backlog, leaving just acceptance testing to be done.
+
+Only developers participated in sprint planning, estimation, and pulling stories from the PB this sprint.
