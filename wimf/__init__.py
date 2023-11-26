@@ -7,8 +7,7 @@ import os
 
 #import db handling
 from . import db
-
-
+from wimf import views
 from flask import Flask, render_template, request, redirect
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, CSRFProtect
@@ -37,16 +36,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    foo = secrets.token_urlsafe(16)
-    app.secret_key = foo
-    bootstrap = Bootstrap5(app)
-    csrf = CSRFProtect(app)
+    app.secret_key = secrets.token_urlsafe(16)
+    Bootstrap5(app)
+    CSRFProtect(app)
 
     db.init_app(app)
-
-    from wimf import views
     app.register_blueprint(views.bp)
-  #  app.add_url_rule("/", endpoint="dashboard")
-    return app
 
-from wimf import views
+    return app

@@ -16,20 +16,15 @@ def db_convert_isodate(s: str) -> date:
     In case the db spits out NULL (python None) then spit out a None too.
     Returns None if a ValueError/TypeError occurred.
     """
-
-    ret = None
-
-    if s is None: # if row field is a SQL NULL/python None
-        return ret
-
+    if s is None:
+        return None
     try:
-        ret = date.fromisoformat(s.strip())
-    except (ValueError, TypeError) as e:
-        # e.g. if malformed or non-string input
-        pass # and return none
+        return date.fromisoformat(s.strip())
+    except (ValueError, TypeError):
+        pass
     except Exception as e:
-        # something weird happened, complain and pass exception throughq
         print(f"Unexpected {e=}, {type(e)=}")
         raise
-    finally:
-        return ret
+
+def format_quantity(quantity: int) -> str:
+    return f"{quantity} pcs"

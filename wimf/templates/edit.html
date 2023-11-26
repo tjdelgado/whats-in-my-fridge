@@ -2,10 +2,29 @@
 {% from "bootstrap5/form.html" import render_form %}
 
 {% block title %}
-    Dashboard
+    Edit Item
 {% endblock %}
 
 {% block main %}
     <h1 class="center">Edit Item</h1>
-		{{ render_form(editForm) }}
+    <form method="POST">
+        {{ editForm.hidden_tag() }}
+        <div class="form-group">
+            {{ editForm.name.label }}
+            {{ editForm.name(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ editForm.quantity.label }}
+            {{ editForm.quantity(class="form-control", type="number", min=1) }}
+        </div>
+        <div class="form-group">
+            {{ editForm.dayAdded.label }}
+            {{ editForm.dayAdded(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ editForm.expiryDay.label }}
+            {{ editForm.expiryDay(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 {% endblock %}
