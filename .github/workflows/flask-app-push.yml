@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  test_and_deploy::
+  test_and_deploy:
     name: Run Tests and Deploy
     runs-on: ubuntu-latest
 
