@@ -29,14 +29,14 @@ def client(app):
     return app.test_client()
 
 def test_database_initialization(app):
-    assert 1 = 1
+    assert 1 == 1
     
     # with app.app_context():
     #     db = get_db()
     #     assert db.execute("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='items'").fetchone()[0] == 1
 
 def test_insert_fridge_item(app):
-    assert 1 = 1
+    assert 1 == 1
     
     # test_item = FridgeItem(item_id=1, name="Milk", expiry_time=7, date_added='2023-01-01', expiry_date='2023-01-08')
     # with app.app_context():
