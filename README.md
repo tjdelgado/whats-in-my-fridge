@@ -15,14 +15,12 @@ Lester Leong - Developer + Product Owner
 Scott M - Developer
 
 ## Schedule
-Standup Monday after class
-Sprint planning Wednesdays at 6pm EST
+Check Slack / the calendar.
 
 ## Test Server
 A periodically updated demo of our software can be found at the following link:
 
 <http://44.218.113.51/>
-(HTTPS support coming soon...)
 
 ### Stakeholders
 * Caroline Mak (real)
@@ -42,7 +40,7 @@ More convenience and function than google sheets.
 ## Project Management Notes
 
 ### General Sprint Evidence Document (screenshots etc)
-This doc has relevant evidence, screenshots, etc required for each sprint as part of the course assessments. This includes evidence of e.g., mob programming exercises, daily scrums, evidence of stakeholder presence and sprint reviews, 
+This doc has relevant evidence, screenshots, etc required for each sprint as part of the course assessments. This includes evidence of e.g., mob programming exercises, daily scrums, evidence of stakeholder presence and sprint reviews, and so on.
 
 <https://docs.google.com/document/d/1r9uT7BAWoyhSSmk__qAykeqaUfGpW-KqFXG_Foq_eLE/edit?usp=sharing>
 
@@ -89,6 +87,6 @@ Tests for this and future sprints can be found in the top level `tests` director
 ### Sprint 2 Notes
 
 #### Velocity Estimation
-For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 8 story points this sprint, since that's the number of points we completed last sprint. We revised that to 9 since one of our developers in a fit of excitement accidentally implemented a 2-point feature not in last sprint's backlog, leaving just acceptance testing to be done.
+For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 8 story points this sprint, since that's the number of points we completed last sprint. We upped that estimate to 9 since we thought we'd get one extra small story in this sprrint.
 
 Only developers participated in sprint planning, estimation, and pulling stories from the PB this sprint.
