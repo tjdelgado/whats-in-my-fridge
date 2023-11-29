@@ -78,6 +78,13 @@ def edit_item(item_id):
             mydb.commit()
             return redirect(url_for("views.dashboard"))
 
+
+@bp.route('/<int:item_id>/archived', methods=['POST', 'GET'])
+def archived_item(item_id):
+    print("archived!")
+    return redirect(url_for("views.success"))
+
+
 @bp.route('/items')
 def items():
     return "implement me!"

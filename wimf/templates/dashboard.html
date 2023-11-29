@@ -17,6 +17,7 @@
             <th><a href="/?sort=expiry_date&direction=asc">Expiry Date</a></th>
             <th>Edit Item</th>
             <th>Delete Item</th>
+            <th>Archived Item</th>
         </tr>
         {% for i in current_items %}
             {% set days_to_expiry = i.days_to_expiry() %}
@@ -32,9 +33,17 @@
                 </td>
                 <td>
                     <form action="{{ url_for('views.delete_item', item_id=i.item_id) }}" method="post" class="delete-item">
+                        {{ form.csrf_token }}
                         <input type="submit" value="Delete" />
                     </form>
                 </td>
+                <td>
+                    <form action="{{ url_for('views.archived_item', item_id=i.item_id) }}" method="post" class="archive-item">
+                        {{ form.csrf_token }}
+                        <input type="submit" value="Archived" />
+                    </form>
+                </td>       
+                
             </tr>
         {% endfor %}
     </table>
