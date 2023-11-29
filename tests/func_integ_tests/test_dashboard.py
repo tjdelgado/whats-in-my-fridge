@@ -1,10 +1,25 @@
 # runs a basic functional test on the dashboard
+# Note that we're actually mocking a client and server with the Flask libs
+# so these do count as unit tests...
 
-def test_dashboard(client): #TODO!
-    # response = client.get('/')
-    # # need b before string to make bytes literal for type matching to response.data
+from bs4 import BeautifulSoup
+from datetime import date, timedelta, datetime
+import pytest
+from flask import render_template
+from wimf.data_models import FridgeItem
+from wimf.views import ItemForm
 
-    # expected_response = b"""<tr>
-    #         <td>eggs</td>
-    #         <td>2023-11-11</td>"""
+def test_dashboard(app):
     assert 1 == 1
+
+    # TODO need to restructure dashboard template etc to make this test make sense
+
+    # with app.test_request_context("/", method="GET"):
+    #     a = render_template("dashboard.html",
+    #                         form=ItemForm(),
+    #                         current_items=[FridgeItem("test",
+    #                                                   1,
+    #                                                   0,
+    #                                                   date.today(),
+    #                                                   date.today())])
+    # assert a is not None
