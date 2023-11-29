@@ -47,13 +47,20 @@ NOTE THAT ALL TESTS should live in the /tests directory, and ideally begin with 
      `pip install -r requirements.txt`
 4. How to make a branch suitable for creating a PR on the commandline (using git not gh)
 
-Make a branch:
+- Make a branch:
     `git checkout -b some-feature`
-Then make edits, commit, as by:
+
+- Then make edits, commit, as by:
     `git commit -a -m "message"`
-Then push the branch
+
+- Then push the branch
     `git push origin some-feature`
 
+- Then switch back to  main branch
+    `git switch main`
+
+- Then sync local repo with chances
+    `git pull`
 
 
 # Database schema notes
