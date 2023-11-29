@@ -9,17 +9,19 @@ from flask import render_template
 from wimf.data_models import FridgeItem
 from wimf.views import ItemForm
 
-def test_dashboard(app):
+def test_dashboard_table_display(app):
     assert 1 == 1
 
-    # TODO need to restructure dashboard template etc to make this test make sense
+    # comment to show how to push a branch
 
-    # with app.test_request_context("/", method="GET"):
-    #     a = render_template("dashboard.html",
-    #                         form=ItemForm(),
-    #                         current_items=[FridgeItem("test",
-    #                                                   1,
-    #                                                   0,
-    #                                                   date.today(),
-    #                                                   date.today())])
-    # assert a is not None
+    # TODO need to restructure dashboard template etc to make this test make sense
+    with app.test_request_context("/", method="GET"):
+        a = render_template("dashboard.html",
+                            form=ItemForm(),
+                            current_items=[FridgeItem(1,
+                                                      "test",
+                                                      0,
+                                                      date.today(),
+                                                      date.today())])
+    assert a is not None
+    #  TODO: make test better!
