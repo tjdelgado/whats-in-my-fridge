@@ -5,8 +5,10 @@ import os
 import tempfile
 
 import pytest
-from wimf import create_app
+from wimf import create_app, views
 from wimf.db import get_db, init_db
+
+
 
 # for later - open test db population script
 # with open(os.path.join(os.path.dirname(__file__), 'add_test_data.sql'), 'rb') as f:
@@ -18,7 +20,7 @@ def app():
     db_fd, db_path = tempfile.mkstemp()
 
     app = create_app({
-        'TESTING': True,
+#        'TESTING': True,
         # uncomment when we actually use a temp db
         # 'DATABASE': db_path,
     })
@@ -27,6 +29,8 @@ def app():
         init_db()
         # uncomment when test data sql script done
         # get_db().executescript(_data_sql)
+
+
 
     yield app
 
