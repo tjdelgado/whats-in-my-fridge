@@ -20,7 +20,8 @@ def app():
     db_fd, db_path = tempfile.mkstemp()
 
     app = create_app({
-#        'TESTING': True,
+        'TESTING': True,
+        'SERVER_NAME': 'testhost:5000'
         # uncomment when we actually use a temp db
         # 'DATABASE': db_path,
     })
