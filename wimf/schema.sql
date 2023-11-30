@@ -9,7 +9,8 @@ CREATE TABLE "items" (
     "quantity" INTEGER DEFAULT 1,
     "expiry_time" INTEGER NOT NULL,
     "date_added" TEXT NOT NULL DEFAULT CURRENT_DATE,
-    "expiry_date" TEXT DEFAULT NULL
+    "expiry_date" TEXT DEFAULT NULL,
+    "archived" INTEGER DEFAULT 0
 );
 
 CREATE TRIGGER compute_expiry_date
@@ -21,6 +22,7 @@ BEGIN
     SET "expiry_date" = date('now', '+' || NEW."expiry_time" || ' days')
     WHERE "id" = NEW."id";
 END;
+
 
 CREATE TABLE "stored_items" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,

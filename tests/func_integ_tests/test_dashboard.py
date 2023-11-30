@@ -17,7 +17,7 @@ def test_dashboard_table_display(app):
     # need request_context to simulate a request so we can call render_template
     with app.test_request_context("/", method="GET"):
         # this is similar to the render_template call in the dashboard endpoint
-        items = [FridgeItem(1, "test", 0, date.today(), date.today())]
+        items = [FridgeItem(1, "test", 0, date.today(), date.today(), 0)]
         templ = render_template("dashboard.html", form=ItemForm(), \
                                current_items=items)
 

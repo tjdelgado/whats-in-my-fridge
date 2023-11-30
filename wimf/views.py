@@ -29,7 +29,7 @@ def dashboard():
     mydb = db.get_db()
     query = f"SELECT * FROM ITEMS ORDER BY {sort} {direction}"
     rows = mydb.execute(query).fetchall()
-    current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"])) for r in rows]
+    current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in rows]
     form = ItemForm()
     if form.validate_on_submit():
         name = form.name.data
@@ -38,7 +38,8 @@ def dashboard():
         expiryDay = form.expiryDay.data
         c = mydb.cursor()
         # Assuming you want to set expiry_time to a default value like 0
-        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date) VALUES (?, ?, ?, ?, ?)", (name, quantity, 0, dayAdded, expiryDay))  
+        # set archived at 0 by default
+        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?)", (name, quantity, 0, dayAdded, expiryDay, 0))  
         mydb.commit()
         return redirect(url_for("views.success"))
     return render_template("dashboard.html", current_items=current_items, form=form)
@@ -81,9 +82,23 @@ def edit_item(item_id):
 
 @bp.route('/<int:item_id>/archived', methods=['POST', 'GET'])
 def archived_item(item_id):
-    print("archived!")
+    mydb = db.get_db()
+    if request.method == "POST":
+        c = mydb.cursor()
+        c.execute("UPDATE ITEMS SET archived = ? WHERE id = ?", (1, item_id))
+        mydb.commit()
+        return redirect(url_for("views.dashboard"))
+
     return redirect(url_for("views.success"))
 
+@bp.route('/archived_list', methods=["GET"])
+def archived_list():
+    mydb = db.get_db()
+    query = f"SELECT * FROM ITEMS WHERE archived = 1"
+    rows = mydb.execute(query).fetchall()
+    archived_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in rows]
+    return render_template("archived.html", archived_items=archived_items)
+    
 
 @bp.route('/items')
 def items():
