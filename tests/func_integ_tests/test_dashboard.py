@@ -10,9 +10,6 @@ from wimf.data_models import FridgeItem
 from wimf.views import ItemForm
 
 def test_dashboard_table_display(app):
-    assert 1 == 1
-
-    # comment to show how to push a branch
 
     # TODO need to restructure dashboard template etc to make this test make sense
     with app.test_request_context("/", method="GET"):
