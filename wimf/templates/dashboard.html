@@ -24,7 +24,7 @@
       <tbody>
         {% for i in current_items %}
             {% set days_to_expiry = i.days_to_expiry() %}
-            <tr class="{{ 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
+            <tr class="{{ '' if days_to_expiry is none else 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
                 <td>{{ i.name }}</td>
                 <td>{{ i.quantity }}</td>
                 <td>{{ i.date_added.isoformat() }}</td>
