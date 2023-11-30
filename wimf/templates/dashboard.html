@@ -10,6 +10,7 @@
     <hr>
     {% if current_items|length > 0 %}
     <table class="center">
+      <thead>
         <tr>
             <th><a href="/?sort=name&direction=asc">Name</a></th>
             <th><a href="/?sort=quantity&direction=asc">Quantity</a></th>
@@ -19,6 +20,8 @@
             <th>Delete Item</th>
             <th>Archived Item</th>
         </tr>
+      </thead>
+      <tbody>
         {% for i in current_items %}
             {% set days_to_expiry = i.days_to_expiry() %}
             <tr class="{{ 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
@@ -42,10 +45,11 @@
                         {{ form.csrf_token }}
                         <input type="submit" value="Archived" />
                     </form>
-                </td>       
-                
+                </td>
+
             </tr>
-        {% endfor %}
+            {% endfor %}
+      </tbody>
     </table>
     {% else %}
     <p class="center">Nothing in the fridge!</p>
