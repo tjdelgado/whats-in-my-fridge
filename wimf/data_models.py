@@ -39,12 +39,13 @@ class FridgeItem:
     expiry_date is None, returns None.
 
     """
-    def __init__(self, item_id, name, quantity, date_added, expiry_date):
+    def __init__(self, item_id, name, quantity, date_added, expiry_date, archived):
         self.item_id = item_id
         self.name = name
         self.quantity = quantity
         self.date_added = date_added
         self.expiry_date = expiry_date
+        self.archived = archived
 
     def __str__(self):
         return f"id: {self.item_id}, name: {self.name}, quantity: {self.quantity}, date_added: {self.date_added}, expiry_date: {self.expiry_date}"
