@@ -36,8 +36,8 @@ def test_dashboard_table_display(app):
 
     assert cols[0].text == 'test'
     assert cols[1].text == '0'
-    assert cols[2].text == '2023-11-29'
-    assert cols[3].text == '2023-11-29'
+    assert cols[2].text == date.today().isoformat()
+    assert cols[3].text == date.today().isoformat()
 
     #breakpoint()
     assert templ is not None
