@@ -56,11 +56,17 @@ NOTE THAT ALL TESTS should live in the /tests directory, and ideally begin with 
 - Then push the branch
     `git push origin some-feature`
 
+- Then go to GH and try and merge the PR once tests pass. Make sure to delete the branch on GH once merged/
+
 - Then switch back to  main branch
     `git switch main`
 
 - Then sync local repo with chances
     `git pull`
+
+- Then delete your local copy of the branch which should have been deleted on GH as by
+
+    `git branch -d some-feature`
 
 
 # Database schema notes
