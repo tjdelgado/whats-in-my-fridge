@@ -27,7 +27,7 @@ def dashboard():
     sort = request.args.get('sort', 'name')
     direction = request.args.get('direction', 'asc')
     mydb = db.get_db()
-    query = f"SELECT * FROM ITEMS ORDER BY {sort} {direction}"
+    query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction} "
     rows = mydb.execute(query).fetchall()
     current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in rows]
     form = ItemForm()
@@ -79,17 +79,18 @@ def edit_item(item_id):
             mydb.commit()
             return redirect(url_for("views.dashboard"))
 
-
-@bp.route('/<int:item_id>/archived', methods=['POST', 'GET'])
-def archived_item(item_id):
+# archived function, let the user archived or unarchived the item they want
+@bp.route('/<int:item_id>/archived/<int:archived>', methods=['POST', 'GET'])
+def archived_item(item_id, archived):
     mydb = db.get_db()
     if request.method == "POST":
         c = mydb.cursor()
-        c.execute("UPDATE ITEMS SET archived = ? WHERE id = ?", (1, item_id))
+        c.execute("UPDATE ITEMS SET archived = ? WHERE id = ?", (archived, item_id))
         mydb.commit()
         return redirect(url_for("views.dashboard"))
 
     return redirect(url_for("views.success"))
+
 
 @bp.route('/archived_list', methods=["GET"])
 def archived_list():
