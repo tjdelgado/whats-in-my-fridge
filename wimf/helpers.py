@@ -20,8 +20,8 @@ def db_convert_isodate(s: str) -> date:
         return None
     try:
         return date.fromisoformat(s.strip())
-    except (ValueError, TypeError):
-        pass
+    except (ValueError, TypeError, AttributeError):
+        return None
     except Exception as e:
         print(f"Unexpected {e=}, {type(e)=}")
         raise
