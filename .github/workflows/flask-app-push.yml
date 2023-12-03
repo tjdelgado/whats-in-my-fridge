@@ -28,3 +28,9 @@ jobs:
     - name: Test with pytest
       run: |
         python3 -m pytest
+    - name: Deploy code
+      run: |
+        curl -X POST -H "x-api-key: ${{ secrets.API_KEY }}" -H "Content-Type: application/json" -d '{}' https://16kp6jr2cj.execute-api.us-east-1.amazonaws.com/Production
+    - name: Verify the app is up and running
+      run: |
+        curl http://44.218.113.51
