@@ -177,3 +177,21 @@ def test_dashboard_no_expiry_render(app):
 
     cols = [td for td in table_rows[0] if td != '\n']
     assert cols[3].text == 'N/A'
+
+def test_dashboard_h1_title(app):
+    """Tests that the dashboard template has an h1 tag with 'What's in my fridge'."""
+
+    with app.test_request_context("/", method="GET"):
+        # Render the template with any necessary data. 
+        # Here, an empty list is passed for current_items as it's not relevant to this test.
+        templ = render_template("dashboard.html", form=ItemForm(), current_items=[])
+
+    # Parse the rendered template
+    parsed = BeautifulSoup(templ, features="html.parser")
+
+    # Find the h1 tag
+    h1_tag = parsed.find('h1')
+
+    # Check if the h1 tag exists and has the correct text
+    assert h1_tag is not None, "h1 tag not found in the template"
+    assert h1_tag.text.strip() == "What's in my fridge", "h1 tag does not have the correct text"
