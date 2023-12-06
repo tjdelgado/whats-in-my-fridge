@@ -195,3 +195,23 @@ def test_dashboard_h1_title(app):
     # Check if the h1 tag exists and has the correct text
     assert h1_tag is not None, "h1 tag not found in the template"
     assert h1_tag.text.strip() == "What's in my fridge", "h1 tag does not have the correct text"
+
+def test_dashboard_table_headers(app):
+    """Tests that the dashboard table headers are correctly abbreviated."""
+
+    with app.test_request_context("/", method="GET"):
+        # Provide a mock item to ensure headers are rendered
+        mock_items = [FridgeItem(1, "MockItem", 1, date.today(), date.today())]
+        templ = render_template("dashboard.html", form=ItemForm(), current_items=mock_items)
+
+    # Parse the rendered template
+    parsed = BeautifulSoup(templ, features="html.parser")
+
+    # Find the table headers within the thead element
+    headers = [th.text.strip() for th in parsed.thead.find_all('th')]
+
+    # Define the expected headers
+    expected_headers = ["Name", "Qty", "Added", "Expires", "Edit", "Delete", "Archive"]
+
+    # Check if the headers in the template match the expected headers
+    assert headers == expected_headers, f"Headers do not match. Found: {headers}"
