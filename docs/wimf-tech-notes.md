@@ -36,6 +36,9 @@ when it detects such changes.
 3. If you need to re-init the db, try
     `flask --app wimf init-db`
 
+4. To migrate the db to a newer version:
+
+    `flask --app wimf migrate-db`
 # Other commonly used commands
 
 1. To run unit tests, first cd into the root directory of the project (not /wimf) and run:
