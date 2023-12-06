@@ -200,8 +200,8 @@ def test_dashboard_table_headers(app):
     """Tests that the dashboard table headers are correctly abbreviated."""
 
     with app.test_request_context("/", method="GET"):
-        # Provide a mock item to ensure headers are rendered
-        mock_items = [FridgeItem(1, "MockItem", 1, date.today(), date.today())]
+        # Provide a mock item with all required arguments, including 'archived'
+        mock_items = [FridgeItem(1, "MockItem", 1, date.today(), date.today(), False)]
         templ = render_template("dashboard.html", form=ItemForm(), current_items=mock_items)
 
     # Parse the rendered template
