@@ -31,7 +31,7 @@ CREATE TABLE "item_tags" (
 
 -- some initial data for items in the fridge
 
-INSERT INTO "items" ("name", "quantity", "date_added", "expiry_date")
-VALUES ("rotten eggs", 1, date(), date('now', '-1 days')),
-       ("milk", 2, date(), date('now', '+2 days')),
-       ("bread", 3, date(), date('now', '+7 days'));
+INSERT INTO "items" ("name", "quantity", "expiry_time", "date_added", "expiry_date")
+VALUES ("rotten eggs", 1, -1, date(), date('now', '-1 days')),
+       ("milk", 2, 2, date(), date('now', '+2 days')),
+       ("bread", 3, 7, date(), date('now', '+7 days'));
