@@ -22,6 +22,12 @@
         </tr>
       </thead>
       <tbody>
+        <button class="btn btn-info m-1" data-bs-toggle="collapse" data-bs-target="#demo">Add Item</button>
+        <div class="d-flex justify-content-center m-1">
+            <div id="demo" class="collapse col-6 m-1">
+                {{ render_form(form) }}
+            </div>
+        </div>
         {% for i in current_items %}
             {% set days_to_expiry = i.days_to_expiry() %}
             <tr class="{{ '' if days_to_expiry is none else 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
@@ -54,5 +60,5 @@
     {% else %}
     <p class="center">Nothing in the fridge!</p>
     {% endif %}
-    {{ render_form(form) }}
+    <!-- {{ render_form(form) }} -->
 {% endblock %}
