@@ -14,8 +14,9 @@
         <tr>
             <th><a href="/?sort=name&direction=asc">Name</a></th>
             <th><a href="/?sort=quantity&direction=asc">Qty</a></th>
-            <th><a href="/?sort=date_added&direction=asc">Added</a></th>
-            <th><a href="/?sort=expiry_date&direction=asc">Expires</a></th>
+            <th><a href="/?sort=expiry_time&direction=asc">Days</a></th>
+            <!-- <th><a href="/?sort=date_added&direction=asc">Added</a></th> -->
+            <!-- <th><a href="/?sort=expiry_date&direction=asc">Expires</a></th> -->
             <th>Edit</th>
             <th>Delete</th>
             <th>Archived</th>
@@ -33,8 +34,9 @@
             <tr class="{{ '' if days_to_expiry is none else 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
                 <td>{{ i.name }}</td>
                 <td>{{ i.quantity }}</td>
-                <td>{{ i.date_added.isoformat() }}</td>
-                <td>{{ i.expiry_date.isoformat() if i.expiry_date else 'N/A' }}</td>
+                <td>{{ days_to_expiry }}</td>
+                <!-- <td>{{ i.date_added.isoformat() }}</td> -->
+                <!-- <td>{{ i.expiry_date.isoformat() if i.expiry_date else 'N/A' }}</td> -->
                 <td>
                     <form action="{{ url_for('views.edit_item', item_id=i.item_id) }}" method="get" class="edit-item">
                         <input type="submit" value="Edit" />

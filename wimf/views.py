@@ -36,10 +36,11 @@ def dashboard():
         quantity = form.quantity.data
         dayAdded = form.dayAdded.data
         expiryDay = form.expiryDay.data
+        expiryTime = (expiryDay - dayAdded).days
         c = mydb.cursor()
         # Assuming you want to set expiry_time to a default value like 0
         # set archived at 0 by default
-        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?)", (name, quantity, 0, dayAdded, expiryDay, 0))  
+        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?)", (name, quantity, expiryTime, dayAdded, expiryDay, 0))  
         mydb.commit()
         return redirect(url_for("views.success"))
     return render_template("dashboard.html", current_items=current_items, form=form)
