@@ -18,7 +18,7 @@ CREATE TABLE "items" (
 
 
 CREATE TABLE "tags" (
-    "id" INTEGER PRIMARY KEY,
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL
 );
 

@@ -1,0 +1,12 @@
+
+{% extends "parent-template.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+   {{ render_form(tagForm)}}
+{% endblock %}
