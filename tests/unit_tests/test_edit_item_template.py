@@ -21,7 +21,7 @@ def test_edit_template_populated(app):
         testform.dayAdded.data  = today
         testform.expiryDay.data = tomorrow
 
-        templ = render_template("edit.html", editForm=testform)
+        templ = render_template("edit_item.html", editForm=testform)
 
     # parse the whole rendered template
     parsed = BeautifulSoup(templ, features="html.parser")
@@ -56,7 +56,7 @@ def test_edit_template_badvalues(app):
         testform.dayAdded.data  = None
         testform.expiryDay.data = None
 
-        templ = render_template("edit.html", editForm=testform)
+        templ = render_template("edit_item.html", editForm=testform)
 
     # parse the whole rendered template
     parsed = BeautifulSoup(templ, features="html.parser")
@@ -83,7 +83,7 @@ def test_edit_template_blank_form(app):
     with app.test_request_context("/1/edit", method="GET"):
         testform = ItemForm() # blank form
 
-        templ = render_template("edit.html", editForm=testform)
+        templ = render_template("edit_item.html", editForm=testform)
 
     # parse the whole rendered template
     parsed = BeautifulSoup(templ, features="html.parser")

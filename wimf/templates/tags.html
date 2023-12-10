@@ -4,9 +4,43 @@
 
 
 {% block title %}
-    Dashboard
+    Tags
 {% endblock %}
 
 {% block main %}
-   {{ render_form(tagForm)}}
+    <table class="center">
+        <thead>
+          <tr>
+              <th><a>Name</a></th>
+              <th>Edit</th>
+              <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            <button class="btn btn-info m-1" data-bs-toggle="collapse" data-bs-target="#demo">Add Tag</button>
+            <div class="d-flex justify-content-center m-1">
+                <div id="demo" class="collapse col-6 m-1">
+                    {{ render_form(tagForm) }}
+                </div>
+            </div>
+           {% for i in rowsTag %}
+              <tr>
+                <td>{{ i.name }}</td>                
+                <td>
+                    <form action="{{ url_for('views.edit_tag', tag_id=i.id) }}" method="get" class="edit-item">
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-pencil"></i></button>
+                        <!-- <input type="submit" value="Edit" /> -->
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('views.delete_tag', tag_id=i.id) }}" method="post" class="delete-tag">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button class="btn btn-danger" type="submit"><i class="bi bi-trash"></i></button>
+                    </form>
+                </td>
+
+              </tr>
+              {% endfor %}
+        </tbody>
+      </table>
 {% endblock %}
