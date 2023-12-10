@@ -119,7 +119,7 @@ def delete_item(item_id):
     mydb.commit() 
     return redirect(url_for("views.dashboard"))
 
-@bp.route('/<int:tag_id>/edit', methods=['POST', 'GET'])
+@bp.route('/<int:tag_id>/editTag', methods=['POST', 'GET'])
 def edit_tag(tag_id):
     editTag = TagForm()
     mydb = db.get_db()
@@ -137,17 +137,19 @@ def edit_tag(tag_id):
             return redirect(url_for("views.addTags"))
         
         
-@bp.route('/<int:item_id>/edit', methods=['POST', 'GET'])
+@bp.route('/<int:item_id>/editItem', methods=['POST', 'GET'])
 def edit_item(item_id):
     editForm = ItemForm()
     mydb = db.get_db()
     if request.method == "GET":
         item = mydb.execute("SELECT * FROM ITEMS WHERE id = ?", (item_id,)).fetchone()
+        tags = mydb.execute("SELECT * FROM tags")
         if item:
             editForm.name.data = item["name"]
             editForm.quantity.data = item["quantity"]
             editForm.dayAdded.data = db_convert_isodate(item["date_added"])
             editForm.expiryDay.data = db_convert_isodate(item["expiry_date"])
+            editForm.tags.choices = [(g["id"], g["name"]) for g in tags]
         return render_template("edit_item.html", editForm=editForm)
     else:
         if editForm.validate_on_submit():

@@ -30,7 +30,7 @@ def test_edit_template_populated(app):
     form_entries = parsed.form.find_all('div')
 
     # we added just three items should be three rows
-    assert len(form_entries) == 4
+    assert len(form_entries) == 5
 
     # filter out \n again from the tr parse trees
     divs_clean = [[div for div in entry if div != '\n'] for entry in form_entries]
@@ -65,7 +65,7 @@ def test_edit_template_badvalues(app):
     form_entries = parsed.form.find_all('div')
 
     # we added just three items should be three rows
-    assert len(form_entries) == 4
+    assert len(form_entries) == 5
 
     # filter out \n again from the tr parse trees
     divs_clean = [[div for div in entry if div != '\n'] for entry in form_entries]
@@ -92,7 +92,7 @@ def test_edit_template_blank_form(app):
     form_entries = parsed.form.find_all('div')
 
     # we added just three items should be three rows
-    assert len(form_entries) == 4
+    assert len(form_entries) == 5
 
     # filter out \n again from the tr parse trees
     divs_clean = [[div for div in entry if div != '\n'] for entry in form_entries]
