@@ -211,7 +211,7 @@ def test_dashboard_table_headers(app):
     headers = [th.text.strip() for th in parsed.thead.find_all('th')]
 
     # Define the expected headers
-    expected_headers = ["Name", "Qty", "Days", "Edit", "Delete", "Archived"]
+    expected_headers = ["Name", "Qty", "Days", "Edit", "Delete", "Archived", "tags"]
 
     # Check if the headers in the template match the expected headers
     assert headers == expected_headers, f"Headers do not match. Found: {headers}"

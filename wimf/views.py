@@ -4,10 +4,10 @@ from datetime import datetime
 from .data_models import FridgeItem
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField, DateField, TimeField, IntegerField
+from wtforms import StringField, SubmitField, DateField, TimeField, IntegerField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, NumberRange
 import secrets
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 
 from wimf.data_models import FridgeItem
@@ -20,7 +20,9 @@ class ItemForm(FlaskForm):
     quantity = IntegerField("Quantity", validators=[DataRequired(), NumberRange(min=1)], default=1)
     dayAdded = DateField("Day Added", format="%Y-%m-%d", default=datetime.now()) 
     expiryDay = DateField("Day Expiry", format="%Y-%m-%d", default=datetime.now()) 
-    submit = SubmitField("Submit")
+    tags = SelectMultipleField(label="tags", choices=[], coerce=int, validate_choice=False)
+    submit = SubmitField("submit")
+
 
 @bp.route('/', methods=["GET", "POST"])
 def dashboard():
@@ -30,20 +32,51 @@ def dashboard():
     query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction} "
     rows = mydb.execute(query).fetchall()
     current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in rows]
+    current_tags = retrieveTags()
+    for tag in current_tags:
+        print(tag["item_id"])
+        print(tag["tag_id"])
+        print("///")
     form = ItemForm()
+    # prepopulate the tags form choices
+    if request.method == "GET":
+        queryTags = f"SELECT * FROM tags"
+        tags = mydb.execute(queryTags).fetchall()
+        form.tags.choices = [(g["id"], g["name"]) for g in tags]
     if form.validate_on_submit():
         name = form.name.data
         quantity = form.quantity.data
         dayAdded = form.dayAdded.data
         expiryDay = form.expiryDay.data
         expiryTime = (expiryDay - dayAdded).days
+        tags = form.tags.data
         c = mydb.cursor()
         # Assuming you want to set expiry_time to a default value like 0
         # set archived at 0 by default
-        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?)", (name, quantity, expiryTime, dayAdded, expiryDay, 0))  
+        c.execute("INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?) RETURNING id", (name, quantity, expiryTime, dayAdded, expiryDay, 0))  
+        c.fetchall()
+        lastId = c.lastrowid
         mydb.commit()
+        addTagsToDb(lastId, tags)
         return redirect(url_for("views.success"))
-    return render_template("dashboard.html", current_items=current_items, form=form)
+    return render_template("dashboard.html", current_items=current_items, form=form, current_tags=current_tags)
+
+# retrive all tags
+def retrieveTags():
+    mydb = db.get_db()
+    query = "SELECT * FROM tags INNER JOIN item_tags ON tags.id = item_tags.tag_id"
+    currentTags = mydb.execute(query).fetchall()
+    return currentTags
+
+# populate the item_tags db
+def addTagsToDb(rowId, tags):
+    mydb = db.get_db()
+    for tag in tags:
+        c = mydb.cursor()
+        c.execute("INSERT INTO item_tags (item_id, tag_id) VALUES (?, ?)", (rowId, tag))
+        mydb.commit()
+        print("tags added")
+    return 0
 
 @bp.route('/success')
 def success():
