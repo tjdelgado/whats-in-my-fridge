@@ -23,6 +23,11 @@ class ItemForm(FlaskForm):
     tags = SelectMultipleField(label="tags", choices=[], coerce=int, validate_choice=False)
     submit = SubmitField("submit")
 
+class TagForm(FlaskForm):
+    name = StringField("Tag name", validators=[DataRequired(), Length(1, 60)])
+    submit = SubmitField("submit")
+
+
 
 @bp.route('/', methods=["GET", "POST"])
 def dashboard():
@@ -33,10 +38,6 @@ def dashboard():
     rows = mydb.execute(query).fetchall()
     current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in rows]
     current_tags = retrieveTags()
-    for tag in current_tags:
-        print(tag["item_id"])
-        print(tag["tag_id"])
-        print("///")
     form = ItemForm()
     # prepopulate the tags form choices
     if request.method == "GET":
@@ -60,6 +61,23 @@ def dashboard():
         addTagsToDb(lastId, tags)
         return redirect(url_for("views.success"))
     return render_template("dashboard.html", current_items=current_items, form=form, current_tags=current_tags)
+
+
+# add tags
+@bp.route('/tags', methods=["POST", "GET"])
+def addTags():
+    tagForm = TagForm()
+    if tagForm.validate_on_submit():
+        mydb = db.get_db()
+        c = mydb.cursor()
+        name = tagForm.name.data
+        print(name)
+        c.execute("INSERT INTO tags ( name ) VALUES (?)", (name,))
+        mydb.commit()
+        return redirect(url_for("views.dashboard"))
+    return render_template("tags.html", tagForm=tagForm)
+
+
 
 # retrive all tags
 def retrieveTags():
