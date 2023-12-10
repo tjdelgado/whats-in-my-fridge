@@ -1,0 +1,18 @@
+{% extends "parent-template.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}
+    Edit Item
+{% endblock %}
+
+{% block main %}
+    <h1 class="center">Edit Item</h1>
+    <form method="POST">
+        {{ tagForm.hidden_tag() }}
+        <div class="form-group">
+            {{ tagForm.name.label }}
+            {{ tagForm.name(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+{% endblock %}

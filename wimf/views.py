@@ -66,9 +66,13 @@ def dashboard():
 # add tags
 @bp.route('/tags', methods=["POST", "GET"])
 def addTags():
+    mydb = db.get_db()
     tagForm = TagForm()
+    if request.method == "GET":
+        queryTag = f"SELECT * FROM tags"
+        rowsTag = mydb.execute(queryTag).fetchall()
+        return render_template("tags.html", tagForm=tagForm, rowsTag=rowsTag)
     if tagForm.validate_on_submit():
-        mydb = db.get_db()
         c = mydb.cursor()
         name = tagForm.name.data
         print(name)
@@ -76,7 +80,6 @@ def addTags():
         mydb.commit()
         return redirect(url_for("views.dashboard"))
     return render_template("tags.html", tagForm=tagForm)
-
 
 
 # retrive all tags
@@ -93,12 +96,20 @@ def addTagsToDb(rowId, tags):
         c = mydb.cursor()
         c.execute("INSERT INTO item_tags (item_id, tag_id) VALUES (?, ?)", (rowId, tag))
         mydb.commit()
-        print("tags added")
     return 0
 
 @bp.route('/success')
 def success():
     return render_template("success.html") 
+
+@bp.route('/<int:tag_id>/delete', methods=["POST"])
+def delete_tag(tag_id):
+    mydb = db.get_db()
+    c = mydb.cursor()
+    c.execute("DELETE FROM tags WHERE id = ?", (tag_id,))
+    mydb.commit() 
+    return redirect(url_for("views.dashboard"))
+
 
 @bp.route('/<int:item_id>/delete', methods=['POST'])
 def delete_item(item_id):
@@ -108,6 +119,24 @@ def delete_item(item_id):
     mydb.commit() 
     return redirect(url_for("views.dashboard"))
 
+@bp.route('/<int:tag_id>/edit', methods=['POST', 'GET'])
+def edit_tag(tag_id):
+    editTag = TagForm()
+    mydb = db.get_db()
+    if request.method == "GET":
+        tag = mydb.execute("SELECT * FROM tags WHERE id = ?", (tag_id,)).fetchone()
+        if tag:
+            editTag.name.data = tag["name"]
+        return render_template("edit_tag.html", tagForm=editTag)
+    else:
+        if editTag.validate_on_submit():
+            newName = editTag.name.data
+            c = mydb.cursor()
+            c.execute("UPDATE tags SET name = ? WHERE id = ?", (newName, tag_id, ))
+            mydb.commit()
+            return redirect(url_for("views.addTags"))
+        
+        
 @bp.route('/<int:item_id>/edit', methods=['POST', 'GET'])
 def edit_item(item_id):
     editForm = ItemForm()
@@ -119,7 +148,7 @@ def edit_item(item_id):
             editForm.quantity.data = item["quantity"]
             editForm.dayAdded.data = db_convert_isodate(item["date_added"])
             editForm.expiryDay.data = db_convert_isodate(item["expiry_date"])
-        return render_template("edit.html", editForm=editForm)
+        return render_template("edit_item.html", editForm=editForm)
     else:
         if editForm.validate_on_submit():
             newName = editForm.name.data
