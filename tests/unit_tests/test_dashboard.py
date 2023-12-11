@@ -194,7 +194,7 @@ def test_dashboard_h1_title(app):
 
     # Check if the h1 tag exists and has the correct text
     assert h1_tag is not None, "h1 tag not found in the template"
-    assert h1_tag.text.strip() == "What's in my fridge", "h1 tag does not have the correct text"
+    assert h1_tag.text.strip() == "What's in my fridge ?", "h1 tag does not have the correct text"
 
 def test_dashboard_table_headers(app):
     """Tests that the dashboard table headers are correctly abbreviated."""
