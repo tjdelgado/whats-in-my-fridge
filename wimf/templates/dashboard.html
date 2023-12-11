@@ -53,7 +53,6 @@
                     <form action="{{ url_for('views.archived_item', item_id=i.item_id, archived=1) }}" method="post" class="archive-item">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <button class="btn btn-secondary" type="submit"><i class="bi bi-archive"></i></button>
-                        <!-- <input type="submit" value="Archived" /> -->
                     </form>
                 </td>
                 <td>
