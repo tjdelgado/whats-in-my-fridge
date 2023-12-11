@@ -102,7 +102,7 @@ def addTagsToDb(rowId, tags):
 def success():
     return render_template("success.html") 
 
-@bp.route('/<int:tag_id>/delete', methods=["POST"])
+@bp.route('/<int:tag_id>/delete_tag', methods=["POST"])
 def delete_tag(tag_id):
     mydb = db.get_db()
     c = mydb.cursor()
@@ -111,7 +111,7 @@ def delete_tag(tag_id):
     return redirect(url_for("views.dashboard"))
 
 
-@bp.route('/<int:item_id>/delete', methods=['POST'])
+@bp.route('/<int:item_id>/delete_item', methods=['POST', 'GET'])
 def delete_item(item_id):
     mydb = db.get_db()
     c = mydb.cursor()
