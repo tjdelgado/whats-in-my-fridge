@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="center">What's in my fridge</h1>
+    <h1 class="center">What's in my fridge ?</h1>
     <hr>
     {% if current_items|length > 0 %}
     <table class="center">
@@ -70,6 +70,12 @@
     </table>
     {% else %}
     <p class="center">Nothing in the fridge!</p>
+    <button class="btn btn-info m-1" data-bs-toggle="collapse" data-bs-target="#demo">Add Item</button>
+    <div class="d-flex justify-content-center m-1">
+        <div id="demo" class="collapse col-6 m-1">
+            {{ render_form(form) }}
+        </div>
+    </div>
     {% endif %}
     <!-- {{ render_form(form) }} -->
 {% endblock %}
