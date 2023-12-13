@@ -34,6 +34,7 @@ Flask will monitor the project directory (mostly .py files I think) for changes 
 when it detects such changes.
 
 3. If you need to re-init the db, try
+
     `flask --app wimf init-db`
 
 4. To migrate the db to a newer version:
@@ -42,21 +43,32 @@ when it detects such changes.
 # Other commonly used commands
 
 1. To run unit tests, first cd into the root directory of the project (not /wimf) and run:
+
     `python3 -m pytest`
 NOTE THAT ALL TESTS should live in the /tests directory, and ideally begin with `test_`. Otherwise pytest may not find them!
-2. Before you start working, make sure you have the latest version of the repo --- run this command to sync with the repo:
-     `git pull`
-3. Run this every time you pull from the git repo
+
+2. To run BDD tests using behave, make sure you're in the root directory of the project and run:
+
+   `python3 -m behave`
+   or `behave`
+3. Before you start working, make sure you have the latest version of the repo --- run this command to sync with the repo:
+
+    `git pull`
+4. Run this every time you pull from the git repo
+
      `pip install -r requirements.txt`
-4. How to make a branch suitable for creating a PR on the commandline (using git not gh)
+5. How to make a branch suitable for creating a PR on the commandline (using git not gh)
 
 - Make a branch:
+
     `git checkout -b some-feature`
 
 - Then make edits, commit, as by:
+
     `git commit -a -m "message"`
 
 - Then push the branch
+
     `git push origin some-feature`
 
 - Then go to GH and try and merge the PR once tests pass. Make sure to delete the branch on GH once merged/
