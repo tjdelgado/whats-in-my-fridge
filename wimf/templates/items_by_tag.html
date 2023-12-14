@@ -1,5 +1,4 @@
 {% extends "parent-template.html" %}
-{% from "bootstrap5/form.html" import render_form %}
 
 {% block title %}
     Dashboard
@@ -7,6 +6,7 @@
 
 {% block main %}
     <h1 class="center">What's in my fridge ?</h1>
+    <h2 class="center">{{ tagName["name"] }}</h2>
     <hr>
     {% if current_items|length > 0 %}
     <table class="center">
@@ -15,29 +15,18 @@
             <th><a href="/?sort=name&direction=asc">Name</a></th>
             <th><a href="/?sort=quantity&direction=asc">Qty</a></th>
             <th><a href="/?sort=expiry_time&direction=asc">Days</a></th>
-            <!-- <th><a href="/?sort=date_added&direction=asc">Added</a></th> -->
-            <!-- <th><a href="/?sort=expiry_date&direction=asc">Expires</a></th> -->
             <th>Edit</th>
             <th>Delete</th>
             <th>Archived</th>
-            <th>tags</th>
         </tr>
       </thead>
       <tbody>
-        <button class="btn btn-info m-1" data-bs-toggle="collapse" data-bs-target="#demo">Add Item</button>
-        <div class="d-flex justify-content-center m-1">
-            <div id="demo" class="collapse col-6 m-1">
-                {{ render_form(form) }}
-            </div>
-        </div>
         {% for i in current_items %}
-            <!-- {% set days_to_expiry = i.days_to_expiry() %} -->
-            <tr class="{{ i.days_to_expiry() | expiry_status }}">
+            {% set days_to_expiry = i.days_to_expiry() %}
+            <tr class="{{ '' if days_to_expiry is none else 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
                 <td>{{ i.name }}</td>
                 <td>{{ i.quantity }}</td>
                 <td>{{ days_to_expiry }}</td>
-                <!-- <td>{{ i.date_added.isoformat() }}</td> -->
-                <!-- <td>{{ i.expiry_date.isoformat() if i.expiry_date else 'N/A' }}</td> -->
                 <td>
                     <form action="{{ url_for('views.edit_item', item_id=i.item_id) }}" method="get" class="edit-item">
                         <button class="btn btn-primary" type="submit"><i class="bi bi-pencil"></i></button>
@@ -55,31 +44,13 @@
                         <button class="btn btn-secondary" type="submit"><i class="bi bi-archive"></i></button>
                     </form>
                 </td>
-                <td>
-                    {% for tag in current_tags %}
-                        {% set id = i.item_id %}
-                        {% if tag.item_id == id %}
-                            <form action="{{ url_for("views.list_by_tag", tag_id=tag.id)}}" method="post" class="list-tag">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                <button type="submit" class="btn btn-link"><span class="badge bg-success">{{ tag.name }}</span></button>
-                            </form>
-                            
-                        {% endif %}
-                    {% endfor %}
-                </td>
+
 
             </tr>
             {% endfor %}
       </tbody>
     </table>
     {% else %}
-    <p class="center">Nothing in the fridge!</p>
-    <button class="btn btn-info m-1" data-bs-toggle="collapse" data-bs-target="#demo">Add Item</button>
-    <div class="d-flex justify-content-center m-1">
-        <div id="demo" class="collapse col-6 m-1">
-            {{ render_form(form) }}
-        </div>
-    </div>
+    <p class="center">Nothing with this tag!</p>
     {% endif %}
-    <!-- {{ render_form(form) }} -->
 {% endblock %}
