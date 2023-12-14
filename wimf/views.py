@@ -68,6 +68,13 @@ def delete_item(item_id):
     delete_item_query(item_id)
     return redirect(url_for("views.dashboard"))
 
+@bp.route('/<int:tag_id>/listbytag', methods=['POST', 'GET'])
+def list_by_tag(tag_id):
+    tagName = tag_name(tag_id)
+    allId = listing_id(tag_id)
+    current_items = [FridgeItem(r["id"], r["name"], r["quantity"], db_convert_isodate(r["date_added"]), db_convert_isodate(r["expiry_date"]), r["archived"]) for r in allId]
+    return render_template("items_by_tag.html", current_items=current_items, tagName=tagName)
+
 @bp.route('/<int:tag_id>/editTag', methods=['POST', 'GET'])
 def edit_tag(tag_id):
     editTag = TagForm()

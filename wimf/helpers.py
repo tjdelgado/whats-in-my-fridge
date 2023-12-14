@@ -106,6 +106,18 @@ def retrieve_item(item_id: int) -> sqlite3.Row:
     item = mydb.execute("SELECT * FROM ITEMS WHERE id = ?", (item_id,)).fetchone()
     return item
 
+def listing_id(tag_id) -> sqlite3.Row:
+    mydb = db.get_db()
+    c = mydb.cursor()
+    allId = c.execute("SELECT * FROM ITEMS INNER JOIN item_tags ON item_tags.item_id = ITEMS.id WHERE item_tags.tag_id = ?", (tag_id,)).fetchall()
+    return allId
+
+def tag_name(tag_id) -> sqlite3.Row :
+    mydb = db.get_db()
+    c = mydb.cursor()
+    tagName = c.execute("SELECT name FROM tags where id = ?", (tag_id,)).fetchone()
+    return tagName
+
 def update_item(editForm: ItemForm, item_id: int) -> bool:
     mydb = db.get_db()
     newName = editForm.name.data
