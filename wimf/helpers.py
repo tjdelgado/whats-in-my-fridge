@@ -136,22 +136,7 @@ def remove_tags_item(item_id) -> bool:
     mydb = db.get_db()
     c = mydb.cursor()
     c.execute("DELETE FROM item_tags WHERE item_id = ?", (item_id,))
-    return 1
-
-def check_tags_item(item_id, tags: list[int]) -> list[int]:
-    tagsItem = get_tags(item_id)
-    print(f"tagItem {tagsItem}")
-    print(f"tags: {tags}")
-    if tagsItem == tags:
-        print("do nothing")
-    else:
-        print("do something")
-        for tag in tagsItem:
-            if tag not in tags:
-                tags.append(tag)
-            
-        print(tags)
-    return tags
+    return True
 
 def populate_edit_form(editForm: ItemForm,
                        item: sqlite3.Row,
