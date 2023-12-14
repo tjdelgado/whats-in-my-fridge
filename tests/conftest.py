@@ -21,9 +21,10 @@ def app():
 
     app = create_app({
         'TESTING': True,
-        'SERVER_NAME': 'testhost:5000'
-        # uncomment when we actually use a temp db
-        # 'DATABASE': db_path,
+        'SERVER_NAME': 'testhost:5000',
+        # uncomment after I'm done with behave
+        'DATABASE': db_path,
+        'WTF_CSRF_ENABLED': False
     })
 
     with app.app_context():
