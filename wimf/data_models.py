@@ -1,5 +1,5 @@
 """File containing classes for representing the various data encountered in the
-database tables and elsewhere.
+database tables and elsewhere, including WTForms info.
 
 Classes:
 FridgeItem: represents members of the items table in the db
@@ -8,6 +8,11 @@ TODO: StoredItem: represents members of items stored for future reference;
 TODO: Recipe: represents members of the recipe table in the DB"""
 
 from datetime import date, timedelta, datetime
+
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField, DateField, TimeField, IntegerField, SelectMultipleField
+from wtforms.validators import DataRequired, Length, NumberRange
+
 
 class FridgeItem:
     """Class for representing members of the items table in the DB.
@@ -46,7 +51,7 @@ class FridgeItem:
         self.date_added = date_added
         self.expiry_date = expiry_date
         self.archived = archived
-        
+
     def __str__(self):
         return f"id: {self.item_id}, name: {self.name}, quantity: {self.quantity}, date_added: {self.date_added}, expiry_date: {self.expiry_date}"
 
@@ -58,3 +63,15 @@ class FridgeItem:
             return None
         else:
             return (self.expiry_date - date.today()).days
+
+class ItemForm(FlaskForm):
+    name = StringField("Name of Item", validators=[DataRequired(), Length(1, 60)])
+    quantity = IntegerField("Quantity", validators=[DataRequired(), NumberRange(min=1)], default=1)
+    dayAdded = DateField("Day Added", format="%Y-%m-%d", default=datetime.now())
+    expiryDay = DateField("Day Expiry", format="%Y-%m-%d", default=datetime.now())
+    tags = SelectMultipleField(label="tags", choices=[], coerce=int, validate_choice=False)
+    submit = SubmitField("submit")
+
+class TagForm(FlaskForm):
+    name = StringField("Tag name", validators=[DataRequired(), Length(1, 60)])
+    submit = SubmitField("submit")
