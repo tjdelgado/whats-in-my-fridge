@@ -154,3 +154,14 @@ def add_new_item(form: ItemForm) -> bool:
     addTagsToJunctionTable(lastId, tags)
 
     return True
+
+# used as a filter for the jinja templates to select appropriate style for rows
+def expiry_status(days_to_expiry):
+    if days_to_expiry is None:
+        return ''
+    elif days_to_expiry <= 0:
+        return 'expired'
+    elif days_to_expiry <= 3:
+        return 'expiring-soon'
+    else:
+        return ''
