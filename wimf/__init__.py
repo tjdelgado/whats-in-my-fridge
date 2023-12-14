@@ -8,12 +8,17 @@ import os
 #import db handling
 from . import db
 from wimf import views
+from wimf.helpers import expiry_status
 from flask import Flask, render_template, request, redirect
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length
 import secrets
+
+from datetime import date, timedelta
+
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -42,5 +47,7 @@ def create_app(test_config=None):
 
     db.init_app(app)
     app.register_blueprint(views.bp)
+
+    app.jinja_env.filters['expiry_status'] = expiry_status
 
     return app

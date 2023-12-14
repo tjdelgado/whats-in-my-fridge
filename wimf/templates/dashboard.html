@@ -31,8 +31,8 @@
             </div>
         </div>
         {% for i in current_items %}
-            {% set days_to_expiry = i.days_to_expiry() %}
-            <tr class="{{ '' if days_to_expiry is none else 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
+            <!-- {% set days_to_expiry = i.days_to_expiry() %} -->
+            <tr class="{{ i.days_to_expiry() | expiry_status }}">
                 <td>{{ i.name }}</td>
                 <td>{{ i.quantity }}</td>
                 <td>{{ days_to_expiry }}</td>
