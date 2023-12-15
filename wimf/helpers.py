@@ -46,8 +46,6 @@ def delete_item_query(item_id: int) -> bool:
     mydb.commit()
     return True
 
-#### below needs to have tests written for them
-# retrive tags of all items in the items table
 def retrieve_current_tags() -> list[sqlite3.Row]:
     mydb = db.get_db()
     query = "SELECT * FROM tags INNER JOIN item_tags ON tags.id = item_tags.tag_id"
@@ -83,6 +81,8 @@ def update_tag(id: int, new_name: str) -> bool:
     mydb.commit()
     return True
 
+#### below needs to have tests written for them
+# retrive tags of all items in the items table
 def get_tag(id: int) -> sqlite3.Row:
     mydb = db.get_db()
     c = mydb.cursor()
