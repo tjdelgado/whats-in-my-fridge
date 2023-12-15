@@ -85,7 +85,7 @@ Only developers participated in sprint planning, estimating the number of story 
 Tests for this and future sprints can be found in the top level `tests` directory inside the repo. This includes unit tests (in their own folder) and other tests (e.g. functional and integration) we use.
 
 ### Sprint 2 Notes
-
+Enabled behave tests
 #### Velocity Estimation
 For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 8 story points this sprint, since that's the number of points we completed last sprint. We upped that estimate to 9 since we thought we'd get one extra small story in this sprrint.
 
