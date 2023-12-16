@@ -287,7 +287,7 @@ def test_get_current_items(mocker):
 
     # call the fxn to test
     t_sort = "name"
-    t_direction = "ASC"
+    t_direction = "asc"
     query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {t_sort} {t_direction}"
     result = get_current_items(t_sort, t_direction)
 
