@@ -295,5 +295,5 @@ def test_get_current_items(mocker):
     assert result == ret_mock
 
     # did we get the right calls to the mocked db connection?
-    calls = call.execute(query, (t_sort, t_direction,)).fetchall()
+    calls = call.execute(query).fetchall()
     assert db_mock.mock_calls == calls.call_list()
