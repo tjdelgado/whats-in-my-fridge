@@ -182,7 +182,7 @@ def test_dashboard_h1_title(app):
     """Tests that the dashboard template has an h1 tag with 'What's in my fridge'."""
 
     with app.test_request_context("/", method="GET"):
-        # Render the template with any necessary data. 
+        # Render the template with any necessary data.
         # Here, an empty list is passed for current_items as it's not relevant to this test.
         templ = render_template("dashboard.html", form=ItemForm(), current_items=[])
 
@@ -211,7 +211,7 @@ def test_dashboard_table_headers(app):
     headers = [th.text.strip() for th in parsed.thead.find_all('th')]
 
     # Define the expected headers
-    expected_headers = ["Name", "Qty", "Days", "Edit", "Delete", "Archived", "tags"]
+    expected_headers = ["Name", "Qty", "Days", "Edit", "Delete", "Archive", "tags"]
 
     # Check if the headers in the template match the expected headers
     assert headers == expected_headers, f"Headers do not match. Found: {headers}"

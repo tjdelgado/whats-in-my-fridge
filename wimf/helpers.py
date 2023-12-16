@@ -148,7 +148,6 @@ def populate_edit_form(editForm: ItemForm,
     editForm.tags.choices = [(g["id"], g["name"]) for g in tags]
     return True
 
-#### below needs to have tests written for them
 def get_current_items(sort: str, direction: str) -> list[sqlite3.Row]:
     mydb = db.get_db()
     valid_cols = ("name", "quantity", "expiry_time")
@@ -164,6 +163,7 @@ def get_current_items(sort: str, direction: str) -> list[sqlite3.Row]:
     rows = mydb.execute(query).fetchall()
     return rows
 
+#### below needs to have tests written for them
 def add_new_item(form: ItemForm) -> bool:
     mydb = db.get_db()
     name = form.name.data

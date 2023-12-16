@@ -19,7 +19,7 @@
             <!-- <th><a href="/?sort=expiry_date&direction=asc">Expires</a></th> -->
             <th>Edit</th>
             <th>Delete</th>
-            <th>Archived</th>
+            <th>Archive</th>
             <th>tags</th>
         </tr>
       </thead>
@@ -63,7 +63,7 @@
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                 <button type="submit" class="btn btn-link"><span class="badge bg-success">{{ tag.name }}</span></button>
                             </form>
-                            
+
                         {% endif %}
                     {% endfor %}
                 </td>

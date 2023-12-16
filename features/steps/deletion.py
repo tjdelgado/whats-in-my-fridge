@@ -1,9 +1,9 @@
 from behave import given, when, then
 from bs4 import BeautifulSoup
 
-@given('we have an item X on the dashboard')
-def step_impl(context):
-    # item is the default 'milk' item in the schema
+@given('that "{item}" is on the dashboard')
+def step_impl(context, item):
+    # items are some of the default items in the schema
     html = context.client.get('/').data
 
     # parse the whole rendered template
@@ -12,26 +12,33 @@ def step_impl(context):
     # get all rows in the tbody
     table_rows = parsed.find_all('tr')
 
-    found_milk = False
+    found_item = False
 
     for r in table_rows:
         cols = [td for td in r if td != '\n']
         for c in cols:
-            if c.text == 'milk':
-                found_milk = True
+            if c.text == item:
+                found_item = True
             else: pass
 
-    assert found_milk is True
+    assert found_item
 
 
-@when('we call the delete endpoint on item X')
-def step_impl(context):
-    context.client.post('/2/delete_item')
+@when('I delete the "{item}" from the dashboard')
+def step_impl(context, item):
+    # hardcoding to avoid clicking on the item / don't have easy item id lookup from web interface...
+    if item == 'milk':
+        context.client.post('/2/delete_item')
+    elif item == 'rotten eggs':
+        context.client.post('/1/delete_item')
+    else:
+        pass
     assert True
 
-@then('item X no longer appears in the dashboard')
-def step_impl(context):
+@then('"{item}" will no longer appear in the dashboard')
+def step_impl(context, item):
 
+    # items are some of the default items in the schema
     html = context.client.get('/').data
 
     # parse the whole rendered template
@@ -40,13 +47,13 @@ def step_impl(context):
     # get all rows in the tbody
     table_rows = parsed.find_all('tr')
 
-    found_milk = False
+    found_item = False
 
     for r in table_rows:
         cols = [td for td in r if td != '\n']
         for c in cols:
-            if c.text == 'milk':
-                found_milk = True
+            if c.text == item:
+                found_item = True
             else: pass
 
-    assert found_milk is False
+    assert not found_item
