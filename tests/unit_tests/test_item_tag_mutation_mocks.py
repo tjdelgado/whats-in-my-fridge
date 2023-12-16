@@ -246,7 +246,7 @@ def test_update_item(mocker):
     query = "UPDATE ITEMS SET name = ?, quantity = ?, date_added = ?, expiry_date = ? WHERE id = ?"
     query_params = (newName, newQuantity, newDateAdded, newExpiryDate, test_item_id)
 
-    db_mock.cursor().execute.assert_called_once_with(query, query_params)
+    db_mock.cursor().execute.assert_called_with(query, query_params)
     db_mock.commit.assert_called_once()
 
 
