@@ -137,7 +137,7 @@ def get_current_items(sort: str, direction: str) -> list[sqlite3.Row]:
         sort = "expiry_time"
     if direction not in valid_sorts:
         direction = ""
-    query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction} "
+    query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction}"
     rows = mydb.execute(query).fetchall()
     return rows
 
