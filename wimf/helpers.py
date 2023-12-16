@@ -135,8 +135,10 @@ def get_current_items(sort: str, direction: str) -> list[sqlite3.Row]:
     # if someone was naughty and inserted invalid values...
     if sort not in valid_cols:
         sort = "expiry_time"
+
     if direction not in valid_sorts:
         direction = ""
+
     query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction}"
     rows = mydb.execute(query).fetchall()
     return rows
