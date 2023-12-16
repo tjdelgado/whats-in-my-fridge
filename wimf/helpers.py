@@ -46,8 +46,6 @@ def delete_item_query(item_id: int) -> bool:
     mydb.commit()
     return True
 
-#### below needs to have tests written for them
-# retrive tags of all items in the items table
 def retrieve_current_tags() -> list[sqlite3.Row]:
     mydb = db.get_db()
     query = "SELECT * FROM tags INNER JOIN item_tags ON tags.id = item_tags.tag_id"
@@ -83,6 +81,8 @@ def update_tag(id: int, new_name: str) -> bool:
     mydb.commit()
     return True
 
+#### below needs to have tests written for them
+# retrive tags of all items in the items table
 def get_tag(id: int) -> sqlite3.Row:
     mydb = db.get_db()
     c = mydb.cursor()
@@ -106,15 +106,36 @@ def retrieve_item(item_id: int) -> sqlite3.Row:
     item = mydb.execute("SELECT * FROM ITEMS WHERE id = ?", (item_id,)).fetchone()
     return item
 
+def listing_id(tag_id) -> sqlite3.Row:
+    mydb = db.get_db()
+    c = mydb.cursor()
+    allId = c.execute("SELECT * FROM ITEMS INNER JOIN item_tags ON item_tags.item_id = ITEMS.id WHERE item_tags.tag_id = ?", (tag_id,)).fetchall()
+    return allId
+
+def tag_name(tag_id) -> sqlite3.Row :
+    mydb = db.get_db()
+    c = mydb.cursor()
+    tagName = c.execute("SELECT name FROM tags where id = ?", (tag_id,)).fetchone()
+    return tagName
+
 def update_item(editForm: ItemForm, item_id: int) -> bool:
     mydb = db.get_db()
     newName = editForm.name.data
     newQuantity = editForm.quantity.data
     newDateAdded = editForm.dayAdded.data
     newExpiryDate = editForm.expiryDay.data
+    tags = editForm.tags.data
+    remove_tags_item(item_id)
+    addTagsToJunctionTable(item_id, tags)
     c = mydb.cursor()
     c.execute("UPDATE ITEMS SET name = ?, quantity = ?, date_added = ?, expiry_date = ? WHERE id = ?", (newName, newQuantity, newDateAdded, newExpiryDate, item_id))
     mydb.commit()
+    return True
+
+def remove_tags_item(item_id) -> bool:
+    mydb = db.get_db()
+    c = mydb.cursor()
+    c.execute("DELETE FROM item_tags WHERE item_id = ?", (item_id,))
     return True
 
 def populate_edit_form(editForm: ItemForm,

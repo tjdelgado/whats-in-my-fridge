@@ -25,7 +25,10 @@
             </div>
            {% for i in rowsTag %}
               <tr>
-                <td>{{ i.name }}</td>                
+                <td><form action="{{ url_for('views.list_by_tag', tag_id=i.id)}}" method="post" class="list-tag">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <button type="submit" class="btn btn-link"><span class="badge bg-success">{{ i.name }}</span></button>
+                </form> </td>                
                 <td>
                     <form action="{{ url_for('views.edit_tag', tag_id=i.id) }}" method="get" class="edit-item">
                         <button class="btn btn-primary" type="submit"><i class="bi bi-pencil"></i></button>
