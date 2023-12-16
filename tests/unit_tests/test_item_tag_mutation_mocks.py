@@ -4,6 +4,8 @@ from pytest_mock import MockerFixture
 from pytest_mock import PytestMockWarning
 from unittest.mock import MagicMock, call, Mock
 
+from datetime import date
+
 from wimf.views import *
 import wimf.db
 
@@ -298,3 +300,125 @@ def test_get_current_items(mocker):
     # did we get the right calls to the mocked db connection?
     calls = call.execute(query).fetchall()
     assert db_mock.mock_calls == calls.call_list()
+
+def test_get_current_items_invalid_col(mocker):
+    # test behavior if invalid column name passed in url
+
+    # mock the db
+    db_mock = MagicMock()
+    mocker.patch('wimf.db.get_db', return_value = db_mock)
+
+    # set return value of chained calls to the db handle
+    ret_mock = Mock()
+    mock_results = db_mock.execute.return_value
+    mock_results.fetchall.return_value = ret_mock
+
+    # call the fxn to test
+    t_sort = "this is not a column"
+    t_direction = "asc"
+
+    expected_query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY expiry_time {t_direction}"
+    result = get_current_items(t_sort, t_direction)
+
+    # do we get the mocked return value out?
+    assert result == ret_mock
+
+    # did we get the right calls to the mocked db connection?
+    calls = call.execute(expected_query).fetchall()
+    assert db_mock.mock_calls == calls.call_list()
+
+def test_get_current_items_invalid_sort(mocker):
+    # test behavior if invalid sort dir passed in url
+
+    # mock the db
+    db_mock = MagicMock()
+    mocker.patch('wimf.db.get_db', return_value = db_mock)
+
+    # set return value of chained calls to the db handle
+    ret_mock = Mock()
+    mock_results = db_mock.execute.return_value
+    mock_results.fetchall.return_value = ret_mock
+
+    # call the fxn to test
+    t_sort = "expiry_time"
+    t_direction = "this is not a sort"
+
+    expected_query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {t_sort} "
+    result = get_current_items(t_sort, t_direction)
+
+    # do we get the mocked return value out?
+    assert result == ret_mock
+
+    # did we get the right calls to the mocked db connection?
+    calls = call.execute(expected_query).fetchall()
+    assert db_mock.mock_calls == calls.call_list()
+
+def test_get_current_items_invalid_col_and_sort(mocker):
+    # test behavior if invalid column name and sort dir passed in url
+
+    # mock the db
+    db_mock = MagicMock()
+    mocker.patch('wimf.db.get_db', return_value = db_mock)
+
+    # set return value of chained calls to the db handle
+    ret_mock = Mock()
+    mock_results = db_mock.execute.return_value
+    mock_results.fetchall.return_value = ret_mock
+
+    # call the fxn to test
+    t_sort = "this is not a column"
+    t_direction = "this is not a sort"
+
+    expected_query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY expiry_time "
+    result = get_current_items(t_sort, t_direction)
+
+    # do we get the mocked return value out?
+    assert result == ret_mock
+
+    # did we get the right calls to the mocked db connection?
+    calls = call.execute(expected_query).fetchall()
+    assert db_mock.mock_calls == calls.call_list()
+
+
+def test_add_new_item(mocker):
+    # mock methods that need mocking
+    db_mock = MagicMock()
+    jct_table_fxn_mock = MagicMock()
+    mocker.patch('wimf.db.get_db', return_value = db_mock)
+    mocker.patch('wimf.helpers.addTagsToJunctionTable',
+                 jct_table_fxn_mock)
+
+    # data for populating itemForm and for query
+    test_today = date.today()
+    test_name = "name"
+    test_qty = 1
+    test_tags = []
+    test_expiry_time = 0
+    test_is_archived = 0
+
+    # populate the mocked ItemForm
+    test_form = MagicMock()
+    test_form.name.data = test_name
+    test_form.quantity.data = test_qty
+    test_form.dayAdded.data = test_today
+    test_form.expiryDay.data = test_today
+    test_form.tags.data = test_tags
+
+    assert add_new_item(test_form) == True
+
+    query = "INSERT INTO ITEMS (name, quantity, expiry_time, date_added, expiry_date, archived) VALUES (?, ?, ?, ?, ?, ?) RETURNING id"
+    params = (test_name, test_qty, test_expiry_time, test_today, test_today,\
+              test_is_archived)
+
+    db_mock.cursor().execute.assert_called_once_with(query, params)
+    db_mock.commit.assert_called_once()
+    jct_table_fxn_mock.assert_called_once_with(db_mock.cursor().lastrowid,
+                                               test_tags)
+
+def test_expiry_status(mocker):
+    assert expiry_status(None) == ''
+    assert expiry_status(0) == 'expired'
+    assert expiry_status(-1) == 'expired'
+    assert expiry_status(1) == 'expiring-soon'
+    assert expiry_status(3) == 'expiring-soon'
+    assert expiry_status(4) == ''

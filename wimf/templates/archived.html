@@ -17,13 +17,12 @@
             <th><a href="/?sort=expiry_date&direction=asc">Expiry Date</a></th>
             <th>Edit Item</th>
             <th>Delete Item</th>
-            <th>Unarchived Item</th>
+            <th>Unarchive Item</th>
         </tr>
       </thead>
       <tbody>
         {% for i in archived_items %}
-            {% set days_to_expiry = i.days_to_expiry() %}
-            <tr class="{{ 'expired' if days_to_expiry <= 0 else 'expiring-soon' if days_to_expiry <= 3 else '' }}">
+            <tr class="{{ i.days_to_expiry() | expiry_status }}">
                 <td>{{ i.name }}</td>
                 <td>{{ i.quantity }}</td>
                 <td>{{ i.date_added.isoformat() }}</td>
