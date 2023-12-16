@@ -226,11 +226,11 @@ def test_update_item(mocker):
     db_mock = MagicMock()
     mocker.patch('wimf.db.get_db', return_value = db_mock)
 
-    test_form = Mock()
-    test_form.name.data = Mock()
-    test_form.quantity.data = Mock()
-    test_form.dayAdded.data = Mock()
-    test_form.expiryDay.data = Mock()
+    test_form = MagicMock()
+    test_form.name.data = MagicMock()
+    test_form.quantity.data = MagicMock()
+    test_form.dayAdded.data = MagicMock()
+    test_form.expiryDay.data = MagicMock()
 
     newName = test_form.name.data
     newQuantity = test_form.quantity.data
@@ -240,7 +240,7 @@ def test_update_item(mocker):
     test_item_id = Mock()
 
     # make sure the call worked as expected
-    #assert update_item(test_form, test_item_id) == True
+    assert update_item(test_form, test_item_id) == True
 
     # make sure the mocked db handle had the right methods called on it
     query = "UPDATE ITEMS SET name = ?, quantity = ?, date_added = ?, expiry_date = ? WHERE id = ?"
@@ -265,9 +265,9 @@ def test_populate_edit_form(mocker):
         return mock_item_data[key]
     test_item.__getitem__.side_effect = get_item_field
 
-    test_tags = None
+    test_tags = []
 
-    test_form = Mock()
+    test_form = MagicMock()
 
     assert populate_edit_form(test_form, test_item, test_tags) == True
 
