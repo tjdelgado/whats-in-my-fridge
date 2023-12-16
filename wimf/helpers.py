@@ -81,13 +81,12 @@ def update_tag(id: int, new_name: str) -> bool:
     mydb.commit()
     return True
 
-#### below needs to have tests written for them
-# retrive tags of all items in the items table
 def get_tag(id: int) -> sqlite3.Row:
     mydb = db.get_db()
     c = mydb.cursor()
     return c.execute("SELECT * FROM tags WHERE id = ?", (id,)).fetchone()
 
+# retrive tags of all items in the items table
 def get_archived_items() -> list[sqlite3.Row]:
     mydb = db.get_db()
     query = f"SELECT * FROM ITEMS WHERE archived = 1"
@@ -100,6 +99,7 @@ def change_archived_status(item_id: int, archived: int) -> bool:
     c.execute("UPDATE ITEMS SET archived = ? WHERE id = ?", (archived, item_id))
     mydb.commit()
     return True
+
 
 def retrieve_item(item_id: int) -> sqlite3.Row:
     mydb = db.get_db()
@@ -148,9 +148,19 @@ def populate_edit_form(editForm: ItemForm,
     editForm.tags.choices = [(g["id"], g["name"]) for g in tags]
     return True
 
+#### below needs to have tests written for them
 def get_current_items(sort: str, direction: str) -> list[sqlite3.Row]:
     mydb = db.get_db()
-    query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction} "
+    valid_cols = ("name", "quantity", "expiry_time")
+    valid_sorts = ("asc", "desc")
+    # if someone was naughty and inserted invalid values...
+    if sort not in valid_cols:
+        sort = "expiry_time"
+
+    if direction not in valid_sorts:
+        direction = ""
+
+    query = f"SELECT * FROM ITEMS WHERE archived = 0 ORDER BY {sort} {direction}"
     rows = mydb.execute(query).fetchall()
     return rows
 
