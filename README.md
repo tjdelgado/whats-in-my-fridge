@@ -2,7 +2,7 @@
 Flask app for tracking and checking what's in your fridge, when it expires, and what you can make with what's not expired in your fridge.
 
 ## Team Roster
-Thomas Delgado - Developer 
+Thomas Delgado - Developer
 
 Pierre-Alex Journes - Developer
 
@@ -50,7 +50,7 @@ Backlog/Kanban Board link - <https://miro.com/app/board/uXjVNU4Q6oo=/?share_link
 Note that the burndown chart can also be found on the above Miro board. Required screenshots for updates of the burndown chart can be found in the Evidence Doc, linked above.
 
 ### Rationale for ordering project backlog
-We order the items in our product backlog first by the value we expect they will deliver to our stakeholders, and then by the order in which they need to be done. (e.g., if PBI A depends on PBI B to be done, then we list B first, then A, assuming they have the same value to our stakeholders.) 
+We order the items in our product backlog first by the value we expect they will deliver to our stakeholders, and then by the order in which they need to be done. (e.g., if PBI A depends on PBI B to be done, then we list B first, then A, assuming they have the same value to our stakeholders.)
 
 ### Definition of Ready
 We consider a product backlog item ready when:
@@ -61,13 +61,13 @@ We consider a product backlog item ready when:
 * Additional details are filled out as needed, possibly including:
     * Developer tasks
     * Plan of execution
- 
+
 ### User Persona
 As part of our development process, we performed an initial interview with stakeholder CM, and constructed a user persona from her input, which can be found [here]
 (https://docs.google.com/document/d/1qXMOOKYEAWKNkg7sG3r7SIuSYhcEVEM7Kuf6qchsjVU/edit?usp=sharing).
- 
+
 ### Other notes
-To generate our initial backlog estimates, we used the estimation method "big uncertain small", as found here: 
+To generate our initial backlog estimates, we used the estimation method "big uncertain small", as found here:
 <https://www.parabol.co/blog/agile-estimation-techniques/>
 We then further refined our estimates and assigned story points by going through our backlog as a team in a manner similar to "magic estimation" (see same link above).
 
@@ -76,17 +76,26 @@ Only developers participate in our PBI estimates.
 ### Sprint 1 Notes
 
 #### Story point estimation
-For this sprint we forecast we'd finish 13 story points' worth of user stories. 
+For this sprint we forecast we'd finish 13 story points' worth of user stories.
 
 Since we have no prior information on expected or actual sprint velocity as a new team, this estimate came as a result of us talking as a team to determine individual capacities and skills for the sprint, and developers taking on cards they thought they could accomplish this sprint.
 
-Only developers participated in sprint planning, estimating the number of story points in this sprint, and pulling appropriate stories from the product backlog to the sprint backlog for this sprint. 
+Only developers participated in sprint planning, estimating the number of story points in this sprint, and pulling appropriate stories from the product backlog to the sprint backlog for this sprint.
 ### Testing
 Tests for this and future sprints can be found in the top level `tests` directory inside the repo. This includes unit tests (in their own folder) and other tests (e.g. functional and integration) we use.
 
 ### Sprint 2 Notes
-Enabled behave tests
 #### Velocity Estimation
 For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 8 story points this sprint, since that's the number of points we completed last sprint. We upped that estimate to 9 since we thought we'd get one extra small story in this sprrint.
+
+Only developers participated in sprint planning, estimation, and pulling stories from the PB this sprint.
+
+### Sprint 3 Notes
+Enabled behave tests.
+
+#### Velocity Estimation
+For this sprint, we used the "yesterday's weather" forecasting method to come up with an initial estimate of 9 story points this sprint, since that's the number of points we completed last sprint.
+
+Keeping in mind that we completed only 9 points' of stories last sprint due to the thanksgiving holiday sapping half of developers' capacity for sprint 2, and that we had become significantly more familiar with the codebase, we estimated we could do a little under twice the work this sprint, or 16 points.
 
 Only developers participated in sprint planning, estimation, and pulling stories from the PB this sprint.
